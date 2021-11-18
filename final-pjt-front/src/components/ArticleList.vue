@@ -9,9 +9,14 @@
           <th class="text-center" scope="col" style="width: 15%">작성일</th>
           <th class="text-center" scope="col" style="width: 10%">좋아요</th>
         </tr>
-      </thead>
+      </thead>  
       <tbody>
-        <article-list-item></article-list-item>
+        <article-list-item
+          v-for="article in articles"
+          :key="article.id"
+          :article="article"
+        >
+        </article-list-item>
       </tbody>
     </table>
   </div>
@@ -24,7 +29,11 @@ export default {
   name: 'ArticleList',
   components: {
     ArticleListItem,
+  },
+  props: {
+    articles: Array
   }
+
 }
 </script>
 
