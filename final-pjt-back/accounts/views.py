@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -21,3 +23,9 @@ def signup(request):
         user.set_password(request.data.get('password'))
         user.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+def get_username(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
