@@ -1,9 +1,14 @@
 <template>
   <div class="container my-5">
     <!-- 게시글 정보 -->
-    <div>
-      <h3 class="fw-bold">스파이더맨 노웨이홈 너무너무너무 기대된다!!</h3>
-      <p>작성자 | 작성시간</p>
+    <div class="d-flex justify-content-between">
+      <div>
+        <h3 class="fw-bold">스파이더맨 노웨이홈 너무너무너무 기대된다!!</h3>
+        <p>작성자 | 작성시간</p>
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="far fa-heart fa-2x"></i>
+      </div>
     </div>
     <hr>
     <!-- 게시글 내용 -->
@@ -14,22 +19,23 @@
     <!-- 댓글부분 -->
     <div>
       <!-- 댓글내용 -->
-      <div>
-        <h5 class="fw-bold">댓글</h5>
-        <p>댓글내용</p>
-      </div>
+      <comment-list></comment-list>
       <!-- 댓글입력 -->
-      <textarea class="form-control" placeholder="댓글을 남겨보세요." rows="5"></textarea>
-      <div class="d-flex justify-content-end my-2">
-        <button class="btn btn-success">등록</button>
-      </div>
+      <comment-form></comment-form>
     </div>
   </div>
 </template>
 
 <script>
+import CommentForm from '@/components/CommentForm.vue'
+import CommentList from '@/components/CommentList.vue'
+
 export default {
   name: 'ArticleDetail',
+  components: {
+    CommentForm,
+    CommentList,
+  }
 }
 </script>
 
