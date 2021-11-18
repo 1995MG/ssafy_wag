@@ -4,7 +4,9 @@ import Home from '@/views/movies/Home'
 import Signup from '@/views/accounts/Signup'
 import Signin from '@/views/accounts/Signin'
 import Profile from '@/views/accounts/Profile'
-
+import Community from '@/views/community/Community'
+import ArticleForm from '@/views/community/ArticleForm'
+import ArticleDetail from '@/views/community/ArticleDetail'
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,6 +29,21 @@ const routes = [
     path: '/accounts/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/community',
+    name: 'Community',
+    component: Community
+  },
+  {
+    path: '/community/articleform',
+    name: 'ArticleForm',
+    component: ArticleForm
+  },
+  {
+    path: '/community/articledetail',
+    name: 'ArticleDetail',
+    component: ArticleDetail
   },
 ]
 

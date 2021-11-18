@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="profile container">
     <!-- 프로필 정보 -->
     <div class="row my-5">
       <div class="col-3 d-flex justify-content-center">
@@ -7,7 +7,7 @@
       </div>
       <div class="col-9 row">
         <div class="d-flex align-items-center">
-          <h1 class="fw-bold">이름</h1>
+          <h1 class="fw-bold">{{ username }}</h1>
         </div>
         <div class="fw-bold d-flex align-items-center">
           <h1 class="fw-bold">평점</h1>
@@ -29,10 +29,18 @@
 </template>
 
 <script>
+import jwt_decode from 'jwt-decode'
+
 export default {
   name: 'Profile',
-  components: {
-
+  data: function () {
+    return {
+      username: null,
+    }
+  },
+  created: function() {
+    const token = localStorage.getItem('jwt')
+    this.username = jwt_decode(token).username
   }
 }
 </script>

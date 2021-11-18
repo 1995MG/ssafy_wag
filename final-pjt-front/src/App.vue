@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
+      <router-link :to="{ name: 'Home' }">홈</router-link> |
+      <router-link :to="{ name: 'Community' }">커뮤니티</router-link> |
       <span v-if="isSignin">
-        <router-link :to="{ name: 'Home' }">홈</router-link> |
         <router-link :to="{ name: 'Profile' }">프로필</router-link> |
         <router-link to="#" @click.native="logout">로그아웃</router-link> |
       </span>
