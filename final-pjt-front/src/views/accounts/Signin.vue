@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="signin container">
     <h1 class="fw-bold">로그인</h1>
     <div class="my-3 input-group-lg">
       <label class="fw-bold mb-1" for="username">아이디</label>
@@ -9,9 +9,9 @@
     <div class="my-3 input-group-lg">
       <label class="fw-bold mb-1" for="password">비밀번호</label>
       <br>
-      <input v-model="credentials.password" class="form-control" type="password" id="password">
+      <input @keyup.enter="signin" v-model="credentials.password" class="form-control" type="password" id="password">
     </div>
-    <button @keyup.enter="signin" @click="signin" class="btn btn-success btn-lg my-3">로그인</button>
+    <button @click="signin" class="btn btn-success btn-lg my-3">로그인</button>
   </div>
 </template>
 
