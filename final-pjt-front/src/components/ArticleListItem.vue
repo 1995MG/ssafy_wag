@@ -1,5 +1,5 @@
 <template>
-  <tr @click="onClickRedirect()">
+  <tr @click="toDetail(article)" class="align-middle">
     <td class="text-center">{{ article.id }}</td>
     <td class="px-5">{{ article.title }}</td>
     <td>{{ article.username }}</td>
@@ -20,8 +20,8 @@ export default {
     }
   },
   methods:{
-    onClickRedirect: function () {   
-        this.$router.push({ name: 'ArticleDetail' })   
+    toDetail: function (article) {   
+        this.$router.push({ name: 'ArticleDetail', query: {article: article} })   
     },
     setToken: function () {
       const token = localStorage.getItem('jwt')
