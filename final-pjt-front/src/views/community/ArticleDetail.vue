@@ -3,8 +3,8 @@
     <!-- 게시글 정보 -->
     <div class="d-flex justify-content-between">
       <div>
-        <h3 class="fw-bold">스파이더맨 노웨이홈 너무너무너무 기대된다!!</h3>
-        <p>작성자 | 작성시간</p>
+        <h3 class="fw-bold">{{ article.title}}</h3>
+        <p>{{ article.username }}  |  {{ article.created_at.substring(0,10) }} {{ article.created_at.substring(11,16) }}</p>
       </div>
       <div class="d-flex align-items-center">
         <i class="far fa-heart fa-2x"></i>
@@ -13,7 +13,7 @@
     <hr>
     <!-- 게시글 내용 -->
     <div>
-      <p>내용</p>
+      <p>{{ article.content }}</p>
     </div>
     <hr>
     <!-- 댓글부분 -->
@@ -35,6 +35,15 @@ export default {
   components: {
     CommentForm,
     CommentList,
+  },
+  data: function () {
+    return {
+      article: null
+    }
+  },
+  created: function () {
+    this.article = this.$route.query.article
+    console.log(this.$route.query)
   }
 }
 </script>
