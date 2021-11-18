@@ -51,7 +51,7 @@ export default{
     if (token) {
       this.isSignin = true
     }
-  }
+  },
 }
 </script>
 
