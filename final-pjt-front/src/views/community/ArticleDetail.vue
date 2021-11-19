@@ -7,7 +7,7 @@
         <p>{{ article.username }}  |  {{ article.created_at }}</p>
       </div>
       <div class="d-flex align-items-center">
-        <button @click="updateArticle(article)" class="btn mx-1" style="background-color: lightgray;">수정</button>
+        <button @click="updateArticle(articleId)" class="btn mx-1" style="background-color: lightgray;">수정</button>
         <button @click="deleteArticle" class="btn mx-1" style="background-color: lightgray;">삭제</button>
         <span v-if="liked">
           <i @click="like" class="fas fa-heart fa-2x" style="color: red"></i>
@@ -47,26 +47,16 @@ export default {
   data: function () {
     return {
       article: null,
-      liked: null
+      liked: null,
+      articleId: null
     }
   },
   created: function () {
-    axios({
-      method: 'get',
-      url: `http://127.0.0.1:8000/community/${this.article.id}/likes/`,
-      headers: this.setToken()
-    })
-      .then((res) => {
-        this.liked = res.data.liked
-      })
-      .catch((error) => {
-        console.log(error)
-      })
     // console.log(this.$route.params.articleId)
-    const articleId = this.$route.params.articleId
+    this.articleId = this.$route.params.articleId
     axios({
       method: 'get',
-        url: `http://127.0.0.1:8000/community/${articleId}/`,
+        url: `http://127.0.0.1:8000/community/${this.articleId}/`,
         // headers: this.getToken()
       })
         .then((res) => {
@@ -77,6 +67,18 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+
+    axios({
+      method: 'get',
+      url: `http://127.0.0.1:8000/community/${this.articleId}/likes/`,
+      headers: this.setToken()
+    })
+      .then((res) => {
+        this.liked = res.data.liked
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   },
   methods: {
       setToken: function () {
@@ -89,7 +91,7 @@ export default {
     like: function () {
       axios({
         method: 'post',
-        url: `http://127.0.0.1:8000/community/${this.article.id}/likes/`,
+        url: `http://127.0.0.1:8000/community/${this.articleId}/likes/`,
         headers: this.setToken()
       })
         .then((res) => {
@@ -112,7 +114,7 @@ export default {
     deleteArticle: function (article) {
       const config = this.getToken()
       // console.log(article)
-      axios.delete(`http://127.0.0.1:8000/community/${this.article.id}/`, config)
+      axios.delete(`http://127.0.0.1:8000/community/${this.articleId}/`, config)
         .then(res => {
           console.log(res)
           console.log(article.pk)
@@ -122,9 +124,9 @@ export default {
           console.log(err)
         })
     },
-    updateArticle: function (article) {
-      console.log(article)
-      this.$router.push({name: 'ArticleUpdateForm', query: {article: article}})
+    updateArticle: function (articleId) {
+      console.log(articleId)
+      this.$router.push({name: 'ArticleUpdateForm', params: {articleId: articleId}})
     }
   }
 }

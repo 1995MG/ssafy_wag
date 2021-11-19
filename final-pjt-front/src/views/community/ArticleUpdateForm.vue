@@ -21,8 +21,9 @@ export default {
   name: 'ArticleUpdateForm',
   data: function () {
     return {
-      title:this.$route.query.article.title,
-      content: this.$route.query.article.content,
+      article: null,
+      title: null,
+      content: null,
       user: null,
       username: null,
     }
@@ -45,13 +46,13 @@ export default {
       if (articleItem.title) {
         axios({
           method: 'put',
-          url: `http://127.0.0.1:8000/community/${this.$route.query.article.id}/`,
+          url: `http://127.0.0.1:8000/community/${this.articleId}/`,
           data: articleItem,
           headers: this.setToken()
         })
           .then((res) => {
             console.log(res)
-            this.$router.push({ name : 'Community' })
+            this.$router.push({ name : 'ArticleDetail', params: {articleId: this.articleId} })
           })
           .catch((err) => {
             console.log(err)
@@ -60,9 +61,22 @@ export default {
     },
   },
   created: function () {
-    console.log(this.$route.query)
-    // this.title = this.$route.query.article.title
-    // this.content = this.$route.query.article.content
+    this.articleId = this.$route.params.articleId
+    axios({
+      method: 'get',
+        url: `http://127.0.0.1:8000/community/${this.articleId}/`,
+        // headers: this.getToken()
+      })
+        .then((res) => {
+          // console.log(res)
+          this.article = res.data
+          this.title = this.article.title
+          this.content = this.article.content
+          console.log(this.article)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     
     const token = localStorage.getItem('jwt')
     // console.log(jwt_decode(token))

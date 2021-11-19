@@ -42,7 +42,7 @@ const routes = [
     component: ArticleForm
   },
   {
-    path: '/community/articleupdateform',
+    path: '/community/:articleId/articleupdateform',
     name: 'ArticleUpdateForm',
     component: ArticleUpdateForm
   },
