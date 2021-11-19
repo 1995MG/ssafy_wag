@@ -6,6 +6,7 @@ import Signin from '@/views/accounts/Signin'
 import Profile from '@/views/accounts/Profile'
 import Community from '@/views/community/Community'
 import ArticleForm from '@/views/community/ArticleForm'
+import ArticleUpdateForm from '@/views/community/ArticleUpdateForm'
 import ArticleDetail from '@/views/community/ArticleDetail'
 Vue.use(VueRouter)
 
@@ -41,7 +42,12 @@ const routes = [
     component: ArticleForm
   },
   {
-    path: '/community/articledetail',
+    path: '/community/articleupdateform',
+    name: 'ArticleUpdateForm',
+    component: ArticleUpdateForm
+  },
+  {
+    path: '/community/:articleId',
     name: 'ArticleDetail',
     component: ArticleDetail
   },
