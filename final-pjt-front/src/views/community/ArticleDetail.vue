@@ -7,8 +7,10 @@
         <p>{{ article.username }}  |  {{ article.created_at }}</p>
       </div>
       <div class="d-flex align-items-center">
-        <button @click="updateArticle(articleId)" class="btn mx-1" style="background-color: lightgray;">수정</button>
-        <button @click="deleteArticle" class="btn mx-1" style="background-color: lightgray;">삭제</button>
+        <div v-if="login_user === write_user">
+          <button @click="updateArticle(articleId)" class="btn mx-1" style="background-color: lightgray;">수정</button>
+          <button @click="deleteArticle" class="btn mx-1" style="background-color: lightgray;">삭제</button>
+        </div>
         <span v-if="liked">
           <i @click="like" class="fas fa-heart fa-2x" style="color: red"></i>
         </span>
@@ -26,26 +28,25 @@
     <!-- 댓글부분 -->
     <div>
       <!-- 댓글내용 -->
-      <comment-list></comment-list>
-      <!-- 댓글입력 -->
-      <comment-form :article="article"></comment-form>
+      <comment-list :articleId="articleId"></comment-list>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import CommentForm from '@/components/CommentForm.vue'
+import jwt_decode from 'jwt-decode'
 import CommentList from '@/components/CommentList.vue'
 
 export default {
   name: 'ArticleDetail',
   components: {
-    CommentForm,
     CommentList,
   },
   data: function () {
     return {
+      login_user: null,
+      write_user: null,
       article: null,
       liked: null,
       articleId: null
@@ -54,6 +55,7 @@ export default {
   methods: {
     getToken: function () {
       const token = localStorage.getItem('jwt')
+      this.login_user = jwt_decode(token).user_id
       const config = {
         headers: {
           Authorization: `JWT ${token}`
@@ -79,12 +81,12 @@ export default {
       const config = this.getToken()
       // console.log(article)
       axios.delete(`http://127.0.0.1:8000/community/${this.articleId}/`, config)
-        .then(res => {
+        .then((res) => {
           console.log(res)
           console.log(article.pk)
           this.$router.push({name:'Community'})
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
@@ -113,9 +115,8 @@ export default {
         // headers: this.getToken()
     })
       .then((res) => {
-        // console.log(res)
         this.article = res.data
-        // console.log(this.article)
+        this.write_user = this.article.user
       })
       .catch((err) => {
         console.log(err)
