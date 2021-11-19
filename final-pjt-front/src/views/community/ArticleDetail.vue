@@ -47,39 +47,12 @@ export default {
   data: function () {
     return {
       article: null,
-      liked: null
+      liked: null,
+      articleId: null
     }
   },
-  created: function () {
-    axios({
-      method: 'get',
-      url: `http://127.0.0.1:8000/community/${this.article.id}/likes/`,
-      headers: this.setToken()
-    })
-      .then((res) => {
-        this.liked = res.data.liked
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-    // console.log(this.$route.params.articleId)
-    const articleId = this.$route.params.articleId
-    axios({
-      method: 'get',
-        url: `http://127.0.0.1:8000/community/${articleId}/`,
-        // headers: this.getToken()
-      })
-        .then((res) => {
-          // console.log(res)
-          this.article = res.data
-          console.log(this.article)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-  },
   methods: {
-      setToken: function () {
+    setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
         Authorization: `JWT ${token}`
@@ -89,7 +62,7 @@ export default {
     like: function () {
       axios({
         method: 'post',
-        url: `http://127.0.0.1:8000/community/${this.article.id}/likes/`,
+        url: `http://127.0.0.1:8000/community/${this.articleId}/likes/`,
         headers: this.setToken()
       })
         .then((res) => {
@@ -112,7 +85,7 @@ export default {
     deleteArticle: function (article) {
       const config = this.getToken()
       // console.log(article)
-      axios.delete(`http://127.0.0.1:8000/community/${this.article.id}/`, config)
+      axios.delete(`http://127.0.0.1:8000/community/${this.articleId}/`, config)
         .then(res => {
           console.log(res)
           console.log(article.pk)
@@ -126,7 +99,35 @@ export default {
       console.log(article)
       this.$router.push({name: 'ArticleUpdateForm', query: {article: article}})
     }
-  }
+  },
+  created: function () {
+    this.articleId = this.$route.params.articleId
+    axios({
+      method: 'get',
+      url: `http://127.0.0.1:8000/community/${this.articleId}/likes/`,
+      headers: this.setToken()
+    })
+      .then((res) => {
+        this.liked = res.data.liked
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    // console.log(this.$route.params.articleId)
+    axios({
+      method: 'get',
+      url: `http://127.0.0.1:8000/community/${this.articleId}/`,
+        // headers: this.getToken()
+    })
+      .then((res) => {
+        // console.log(res)
+        this.article = res.data
+        // console.log(this.article)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  },
 }
 </script>
 
