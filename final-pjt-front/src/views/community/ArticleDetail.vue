@@ -9,7 +9,12 @@
       <div class="d-flex align-items-center">
         <button @click="updateArticle(article)" class="btn mx-1" style="background-color: lightgray;">수정</button>
         <button @click="deleteArticle" class="btn mx-1" style="background-color: lightgray;">삭제</button>
-        <i class="mx-1 far fa-heart fa-2x"></i>
+        <span v-if="liked">
+          <i @click="like" class="fas fa-heart fa-2x" style="color: red"></i>
+        </span>
+        <span v-else>
+          <i @click="like" class="far fa-heart fa-2x" ></i>
+        </span>
       </div>
     </div>
     <hr>
@@ -45,8 +50,36 @@ export default {
       liked: null
     }
   },
+  created: function () {
+    axios({
+      method: 'get',
+      url: `http://127.0.0.1:8000/community/${this.article.id}/likes/`,
+      headers: this.setToken()
+    })
+      .then((res) => {
+        this.liked = res.data.liked
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    // console.log(this.$route.params.articleId)
+    const articleId = this.$route.params.articleId
+    axios({
+      method: 'get',
+        url: `http://127.0.0.1:8000/community/${articleId}/`,
+        // headers: this.getToken()
+      })
+        .then((res) => {
+          // console.log(res)
+          this.article = res.data
+          console.log(this.article)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+  },
   methods: {
-    setToken: function () {
+      setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
         Authorization: `JWT ${token}`
@@ -66,26 +99,7 @@ export default {
         .catch((error) => {
           console.log(error)
         })
-      }
-  },
-  created: function () {
-    // console.log(this.$route.params.articleId)
-    const articleId = this.$route.params.articleId
-    axios({
-      method: 'get',
-        url: `http://127.0.0.1:8000/community/${articleId}/`,
-        // headers: this.getToken()
-      })
-        .then((res) => {
-          // console.log(res)
-          this.article = res.data
-          console.log(this.article)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-  },
-  methods: {
+      },
     getToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
