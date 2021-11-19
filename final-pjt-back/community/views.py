@@ -48,12 +48,12 @@ def article_detail_update_delete(request, article_pk):
 
 @api_view(['GET', 'POST'])
 @permission_classes([AllowAny])
-def comment_list_create(request):
+def comment_list_create(request, article_pk):
 
     if request.method == 'GET':
-        comments = get_list_or_404(Comment)
-        serializer = CommentSerializer(comments, many=True)
-        return Response(serializer.data)
+        comments = get_list_or_404(Comment, article_id=article_pk)
+        serializers = CommentSerializer(comments, many=True)
+        return Response(serializers.data)
 
     elif request.method == 'POST':
         serializer = CommentSerializer(data=request.data)
@@ -63,7 +63,8 @@ def comment_list_create(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
-def comment_delete(request, comment_pk):
+@permission_classes([AllowAny])
+def comment_delete(request, article_pk, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
     comment.delete()
     return Response({ 'id':comment_pk }, status=status.HTTP_204_NO_CONTENT)
