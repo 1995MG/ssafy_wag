@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny
 
 
 from django.shortcuts import get_list_or_404, get_object_or_404
-from .serializers import ArticleSerializer, CommentSerializer, ArticleListSerializer
+from .serializers import ArticleSerializer, CommentSerializer, ArticleListSerializer, CommentListSerializer
 from .models import Article, Comment
 # Create your views here.
 
@@ -53,7 +53,7 @@ def comment_list_create(request, article_pk):
 
     if request.method == 'GET':
         comments = get_list_or_404(Comment, article_id=article_pk)
-        serializers = CommentSerializer(comments, many=True)
+        serializers = CommentListSerializer(comments, many=True)
         return Response(serializers.data)
 
     elif request.method == 'POST':

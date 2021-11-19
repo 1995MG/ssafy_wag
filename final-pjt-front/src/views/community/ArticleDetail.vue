@@ -26,22 +26,18 @@
     <!-- 댓글부분 -->
     <div>
       <!-- 댓글내용 -->
-      <comment-list></comment-list>
-      <!-- 댓글입력 -->
-      <comment-form :article="article"></comment-form>
+      <comment-list :articleId="articleId"></comment-list>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import CommentForm from '@/components/CommentForm.vue'
 import CommentList from '@/components/CommentList.vue'
 
 export default {
   name: 'ArticleDetail',
   components: {
-    CommentForm,
     CommentList,
   },
   data: function () {
@@ -52,7 +48,7 @@ export default {
     }
   },
   methods: {
-    setToken: function () {
+    getToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
         Authorization: `JWT ${token}`
@@ -63,7 +59,7 @@ export default {
       axios({
         method: 'post',
         url: `http://127.0.0.1:8000/community/${this.articleId}/likes/`,
-        headers: this.setToken()
+        headers: this.getToken()
       })
         .then((res) => {
           this.liked = res.data.liked
@@ -73,25 +69,16 @@ export default {
           console.log(error)
         })
       },
-    getToken: function () {
-      const token = localStorage.getItem('jwt')
-      const config = {
-        headers: {
-          Authorization: `JWT ${token}`
-        }
-      }
-      return config
-    },
     deleteArticle: function (article) {
       const config = this.getToken()
       // console.log(article)
       axios.delete(`http://127.0.0.1:8000/community/${this.articleId}/`, config)
-        .then(res => {
+        .then((res) => {
           console.log(res)
           console.log(article.pk)
           this.$router.push({name:'Community'})
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
@@ -105,7 +92,7 @@ export default {
     axios({
       method: 'get',
       url: `http://127.0.0.1:8000/community/${this.articleId}/likes/`,
-      headers: this.setToken()
+      headers: this.getToken()
     })
       .then((res) => {
         this.liked = res.data.liked
