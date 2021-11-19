@@ -52,27 +52,6 @@ export default {
     }
   },
   methods: {
-    setToken: function () {
-      const token = localStorage.getItem('jwt')
-      const config = {
-        Authorization: `JWT ${token}`
-      }
-      return config
-    },
-    like: function () {
-      axios({
-        method: 'post',
-        url: `http://127.0.0.1:8000/community/${this.articleId}/likes/`,
-        headers: this.setToken()
-      })
-        .then((res) => {
-          this.liked = res.data.liked
-          console.log(res.data)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-      },
     getToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
@@ -82,6 +61,20 @@ export default {
       }
       return config
     },
+    like: function () {
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/community/${this.articleId}/likes/`,
+        headers: this.getToken()
+      })
+        .then((res) => {
+          this.liked = res.data.liked
+          console.log(res.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      },
     deleteArticle: function (article) {
       const config = this.getToken()
       // console.log(article)
@@ -105,7 +98,7 @@ export default {
     axios({
       method: 'get',
       url: `http://127.0.0.1:8000/community/${this.articleId}/likes/`,
-      headers: this.setToken()
+      headers: this.getToken()
     })
       .then((res) => {
         this.liked = res.data.liked
