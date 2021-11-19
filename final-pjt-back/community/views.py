@@ -34,7 +34,7 @@ def article_detail_update_delete(request, article_pk):
 
     if request.method == 'GET':
         serializer = ArticleSerializer(article)
-        print(serializer.to_representation(article))
+        # print(serializer.to_representation(article))
         return Response(serializer.data)
     
     elif request.method == 'PUT':

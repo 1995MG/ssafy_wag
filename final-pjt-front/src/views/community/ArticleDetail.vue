@@ -7,7 +7,7 @@
         <p>{{ article.username }}  |  {{ article.created_at }}</p>
       </div>
       <div class="d-flex align-items-center">
-        <button @click="updateArticle(article)" class="btn mx-1" style="background-color: lightgray;">수정</button>
+        <button @click="updateArticle(articleId)" class="btn mx-1" style="background-color: lightgray;">수정</button>
         <button @click="deleteArticle" class="btn mx-1" style="background-color: lightgray;">삭제</button>
         <span v-if="liked">
           <i @click="like" class="fas fa-heart fa-2x" style="color: red"></i>
@@ -95,9 +95,9 @@ export default {
           console.log(err)
         })
     },
-    updateArticle: function (article) {
-      console.log(article)
-      this.$router.push({name: 'ArticleUpdateForm', query: {article: article}})
+    updateArticle: function (articleId) {
+      console.log(articleId)
+      this.$router.push({name: 'ArticleUpdateForm', params: {articleId: articleId}})
     }
   },
   created: function () {
