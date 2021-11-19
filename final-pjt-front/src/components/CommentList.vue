@@ -24,7 +24,7 @@ export default {
   name: 'CommentList',
   data: function () {
     return {
-      comments: null,
+      comments: [],
       comment: null,
       content: null,
       user: null,
@@ -99,6 +99,20 @@ export default {
             console.log(err)
           })
   },
+  watch: { comments:function () {
+    axios({
+          method: 'get',
+          url: `http://127.0.0.1:8000/community/${this.articleId}/comment/`,
+          headers: this.getToken()
+    })
+      .then((res) => {
+        console.log(res)
+        this.comments = this.res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }}
 }
 </script>
 

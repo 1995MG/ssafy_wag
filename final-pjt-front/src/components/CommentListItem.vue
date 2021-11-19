@@ -4,9 +4,16 @@
       <div>
         <p class="fw-bold">{{ comment.username }}</p>
         <p>{{ comment.content }}</p>
+        <span v-if="liked">
+          <i @click="like" class="fas fa-heart fa-2x" style="color: red"></i>
+        </span>
+        <span v-else>
+          <i @click="like" class="far fa-heart fa-2x" ></i>
+        </span>
+        <p>{{ likeCount }}</p>
       </div>
       <div class="d-flex align-items-center" v-if="login_user === write_user">
-        <button @click="deleteComment" class="btn btn-outline-danger btn-sm">삭제</button>
+        <button @click="deleteComment(comment)" class="btn btn-outline-danger btn-sm">삭제</button>
       </div>
     </div>
     <hr>
@@ -24,6 +31,8 @@ export default {
       write_user: null,
       articleId: null,
       idx: null,
+      liked: null,
+      likeCount: null,
     }
   },
   props: {
@@ -39,13 +48,28 @@ export default {
       }
       return config
     },
-    deleteComment: function (comment) {
+    like: function () {
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/community/${this.articleId}/comment/${this.comment.id}/likes/`,
+        headers: this.getToken()
+      })
+        .then((res) => {
+          this.liked = res.data.liked
+          console.log(res.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    deleteComment: function () {
       this.articleId = this.$route.params.articleId
       const config = this.getToken()
+      console.log(this.comments)
       axios.delete(`http://127.0.0.1:8000/community/${this.articleId}/comment/${this.comment.id}/`, config)
         .then((res) => {
           console.log(res)
-          console.log(comment.id)
+          // console.log(comment.id)
           this.idx = this.comments.indexOf(this.comment)
           this.comments.splice(this.idx, 1)
           // console.log(this.comments)
@@ -59,7 +83,20 @@ export default {
   created: function () {
     this.getToken()
     this.write_user = this.comment.user
-  }
+    this.articleId = this.$route.params.articleId
+    axios({
+      method: 'get',
+      url: `http://127.0.0.1:8000/community/${this.articleId}/comment/${this.comment.id}/likes/`,
+      headers: this.getToken()
+    })
+      .then((res) => {
+        this.liked = res.data.liked
+        this.likeCount = res.data.count
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
 }
 </script>
 
