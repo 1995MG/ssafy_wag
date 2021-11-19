@@ -5,7 +5,7 @@
         <p class="fw-bold">{{ comment.username }}</p>
         <p>{{ comment.content }}</p>
       </div>
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" v-if="login_user === write_user">
         <button @click="deleteComment" class="btn btn-outline-danger btn-sm">삭제</button>
       </div>
     </div>
@@ -15,10 +15,13 @@
 
 <script>
 import axios from 'axios'
+import jwt_decode from 'jwt-decode'
 export default {
   name: 'CommentListItem',
   data: function () {
     return {
+      login_user: null,
+      write_user: null,
       articleId: null,
       idx: null,
     }
@@ -30,6 +33,7 @@ export default {
   methods: {
     getToken: function () {
       const token = localStorage.getItem('jwt')
+      this.login_user = jwt_decode(token).user_id
       const config = {
         Authorization: `JWT ${token}`
       }
@@ -51,6 +55,10 @@ export default {
           console.log(err)
         })
     },
+  },
+  created: function () {
+    this.getToken()
+    this.write_user = this.comment.user
   }
 }
 </script>

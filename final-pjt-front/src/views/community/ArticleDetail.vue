@@ -7,8 +7,10 @@
         <p>{{ article.username }}  |  {{ article.created_at }}</p>
       </div>
       <div class="d-flex align-items-center">
-        <button @click="updateArticle(articleId)" class="btn mx-1" style="background-color: lightgray;">수정</button>
-        <button @click="deleteArticle" class="btn mx-1" style="background-color: lightgray;">삭제</button>
+        <div v-if="login_user === write_user">
+          <button @click="updateArticle(articleId)" class="btn mx-1" style="background-color: lightgray;">수정</button>
+          <button @click="deleteArticle" class="btn mx-1" style="background-color: lightgray;">삭제</button>
+        </div>
         <span v-if="liked">
           <i @click="like" class="fas fa-heart fa-2x" style="color: red"></i>
         </span>
@@ -33,6 +35,7 @@
 
 <script>
 import axios from 'axios'
+import jwt_decode from 'jwt-decode'
 import CommentList from '@/components/CommentList.vue'
 
 export default {
@@ -42,6 +45,8 @@ export default {
   },
   data: function () {
     return {
+      login_user: null,
+      write_user: null,
       article: null,
       liked: null,
       articleId: null
@@ -50,6 +55,7 @@ export default {
   methods: {
     getToken: function () {
       const token = localStorage.getItem('jwt')
+      this.login_user = jwt_decode(token).user_id
       const config = {
         Authorization: `JWT ${token}`
       }
@@ -107,9 +113,8 @@ export default {
         // headers: this.getToken()
     })
       .then((res) => {
-        // console.log(res)
         this.article = res.data
-        // console.log(this.article)
+        this.write_user = this.article.user
       })
       .catch((err) => {
         console.log(err)
