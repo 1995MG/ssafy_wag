@@ -16,7 +16,7 @@ export default {
   data: function () {
     return {
       likeCount: null,
-      articleCreatedAt: null
+      articleCreatedAt: null,
     }
   },
   methods:{
