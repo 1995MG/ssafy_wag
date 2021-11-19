@@ -6,7 +6,7 @@
         <button @click="createArticle" class="btn btn-success btn-lg">등록</button>
       </div>
       <hr>
-      <input v-model="title" class="form-control" type="text" placeholder="제목을 입력해 주세요.">
+      <input :value="title" @input="title=$event.target.value" class="form-control" type="text" placeholder="제목을 입력해 주세요.">
       <br>
       <textarea v-model="content" class="form-control" placeholder="내용을 입력하세요." rows="30"></textarea>
     </div>
@@ -21,7 +21,7 @@ export default {
   name: 'ArticleForm',
   data: function () {
     return {
-      title: null,
+      title: "default",
       content: null,
       user: null,
       username: null,
