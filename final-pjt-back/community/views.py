@@ -77,7 +77,12 @@ def article_likes(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
 
     if request.method == 'GET':
+        if user in article.like_users.all():
+            liked = True
+        else:
+            liked = False
         context = {
+            'liked': liked,
             'count': article.like_users.count()
         }
         return Response(context)

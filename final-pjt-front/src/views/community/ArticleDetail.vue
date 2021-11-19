@@ -51,37 +51,8 @@ export default {
       articleId: null
     }
   },
-  created: function () {
-    // console.log(this.$route.params.articleId)
-    this.articleId = this.$route.params.articleId
-    axios({
-      method: 'get',
-        url: `http://127.0.0.1:8000/community/${this.articleId}/`,
-        // headers: this.getToken()
-      })
-        .then((res) => {
-          // console.log(res)
-          this.article = res.data
-          console.log(this.article)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-
-    axios({
-      method: 'get',
-      url: `http://127.0.0.1:8000/community/${this.articleId}/likes/`,
-      headers: this.setToken()
-    })
-      .then((res) => {
-        this.liked = res.data.liked
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  },
   methods: {
-      setToken: function () {
+    setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
         Authorization: `JWT ${token}`
@@ -128,7 +99,35 @@ export default {
       console.log(articleId)
       this.$router.push({name: 'ArticleUpdateForm', params: {articleId: articleId}})
     }
-  }
+  },
+  created: function () {
+    this.articleId = this.$route.params.articleId
+    axios({
+      method: 'get',
+      url: `http://127.0.0.1:8000/community/${this.articleId}/likes/`,
+      headers: this.setToken()
+    })
+      .then((res) => {
+        this.liked = res.data.liked
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    // console.log(this.$route.params.articleId)
+    axios({
+      method: 'get',
+      url: `http://127.0.0.1:8000/community/${this.articleId}/`,
+        // headers: this.getToken()
+    })
+      .then((res) => {
+        // console.log(res)
+        this.article = res.data
+        // console.log(this.article)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  },
 }
 </script>
 
