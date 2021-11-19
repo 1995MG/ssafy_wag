@@ -21,7 +21,7 @@ export default {
   name: 'ArticleForm',
   data: function () {
     return {
-      title: "default",
+      title: null,
       content: null,
       user: null,
       username: null,
