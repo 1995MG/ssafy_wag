@@ -1,8 +1,14 @@
 <template>
-  <div>
-    <textarea v-model="content" class="form-control" placeholder="댓글을 남겨보세요." rows="5"></textarea>
-    <div class="d-flex justify-content-end my-2">
-      <button @click="createComment" class="btn btn-success">등록</button>
+  <div class="container">
+    <div class="my-5 input-group-lg">
+      <div class="d-flex justify-content-between">
+        <h1 class="fw-bold">커뮤니티 글 수정</h1>
+        <button @click="updateArticle" class="btn btn-success btn-lg">수정</button>
+      </div>
+      <hr>
+      <input :value="title" @input="title=$event.target.value" class="form-control" type="text">
+      <br>
+      <textarea :value="content" @input="content=$event.target.value" class="form-control" rows="30"></textarea>
     </div>
   </div>
 </template>
@@ -12,18 +18,15 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
 export default {
-  name: 'CommentForm',
+  name: 'ArticleUpdateForm',
   data: function () {
     return {
-      content: null,
+      title:this.$route.query.article.title,
+      content: this.$route.query.article.content,
       user: null,
       username: null,
     }
   },
-  props: {
-    article: Object
-  },
-
   methods: {
     setToken: function () {
       const token = localStorage.getItem('jwt')
@@ -32,18 +35,18 @@ export default {
       }
       return config
     },
-    createComment: function () {
-      const commentItem = {
+    updateArticle: function () {
+      const articleItem = {
+        title: this.title,
         content: this.content,
         user: this.user,
         username: this.username
       }
-      if (commentItem.content) {
-        console.log(this.article.id)
+      if (articleItem.title) {
         axios({
-          method: 'post',
-          url: `http://127.0.0.1:8000/community/${this.article.id}/comment/`,
-          data: commentItem,
+          method: 'put',
+          url: `http://127.0.0.1:8000/community/${this.$route.query.article.id}/`,
+          data: articleItem,
           headers: this.setToken()
         })
           .then((res) => {
@@ -57,6 +60,10 @@ export default {
     },
   },
   created: function () {
+    console.log(this.$route.query)
+    // this.title = this.$route.query.article.title
+    // this.content = this.$route.query.article.content
+    
     const token = localStorage.getItem('jwt')
     // console.log(jwt_decode(token))
     this.user = jwt_decode(token).user_id
@@ -67,15 +74,15 @@ export default {
         headers: this.setToken()
       })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.username = res.data.first_name
         })
         .catch((err) => {
           console.log(err)
         })
+
+    
   }
-
-
 }
 </script>
 
