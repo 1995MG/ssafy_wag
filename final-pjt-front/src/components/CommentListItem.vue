@@ -10,9 +10,10 @@
         <span v-else>
           <i @click="like" class="far fa-heart fa-2x" ></i>
         </span>
+        <p>{{ likeCount }}</p>
       </div>
       <div class="d-flex align-items-center" v-if="login_user === write_user">
-        <button @click="deleteComment" class="btn btn-outline-danger btn-sm">삭제</button>
+        <button @click="deleteComment(comment)" class="btn btn-outline-danger btn-sm">삭제</button>
       </div>
     </div>
     <hr>
@@ -31,7 +32,7 @@ export default {
       articleId: null,
       idx: null,
       liked: null,
-      likeCount: null
+      likeCount: null,
     }
   },
   props: {
@@ -60,14 +61,15 @@ export default {
         .catch((error) => {
           console.log(error)
         })
-      },
-    deleteComment: function (comment) {
+    },
+    deleteComment: function () {
       this.articleId = this.$route.params.articleId
       const config = this.getToken()
+      console.log(this.comments)
       axios.delete(`http://127.0.0.1:8000/community/${this.articleId}/comment/${this.comment.id}/`, config)
         .then((res) => {
           console.log(res)
-          console.log(comment.id)
+          // console.log(comment.id)
           this.idx = this.comments.indexOf(this.comment)
           this.comments.splice(this.idx, 1)
           // console.log(this.comments)
@@ -94,7 +96,7 @@ export default {
       .catch((error) => {
         console.log(error)
       })
-  }
+  },
 }
 </script>
 
