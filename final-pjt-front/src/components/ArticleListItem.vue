@@ -21,7 +21,7 @@ export default {
   },
   methods:{
     toDetail: function (article) {   
-        this.$router.push({ name: 'ArticleDetail', query: {article: article} })   
+        this.$router.push({ name: 'ArticleDetail', params: {articleId: article.id} })   
     },
     setToken: function () {
       const token = localStorage.getItem('jwt')
