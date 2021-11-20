@@ -63,6 +63,7 @@ export default {
             this.content = null
             this.comment = res.data
             this.comments.push(this.comment)
+            // console.log(res.data)
           })
           .catch((err) => {
             console.log(err)
@@ -99,20 +100,6 @@ export default {
             console.log(err)
           })
   },
-  watch: { comments:function () {
-    axios({
-          method: 'get',
-          url: `http://127.0.0.1:8000/community/${this.articleId}/comment/`,
-          headers: this.getToken()
-    })
-      .then((res) => {
-        console.log(res)
-        this.comments = this.res.data
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }}
 }
 </script>
 
