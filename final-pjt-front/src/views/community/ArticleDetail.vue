@@ -57,9 +57,7 @@ export default {
       const token = localStorage.getItem('jwt')
       this.login_user = jwt_decode(token).user_id
       const config = {
-        headers: {
-          Authorization: `JWT ${token}`
-        }
+        Authorization: `JWT ${token}`
       }
       return config
     },
