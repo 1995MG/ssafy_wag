@@ -10,7 +10,7 @@
     </comment-list-item>
     <textarea v-model="content" class="form-control" placeholder="댓글을 남겨보세요." rows="5"></textarea>
     <div class="d-flex justify-content-end my-2">
-      <button @click="createComment();" class="btn btn-success">등록</button>
+      <button @click="createComment" class="btn btn-success">등록</button>
     </div>
   </div>
 </template>
@@ -100,9 +100,6 @@ export default {
             console.log(err)
           })
   },
-  updated: function () {
-    
-  }
 }
 </script>
 
