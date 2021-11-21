@@ -14,6 +14,7 @@ def index(request):
     movies = get_list_or_404(Movie)
     serializers = MovieListSerializers(movies, many=True)
     return Response(serializers.data)
+    # return R
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
