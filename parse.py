@@ -9,7 +9,7 @@ url = 'https://api.themoviedb.org/3/movie/popular?api_key=131783423dfc5d2cb752bb
 # pprint(response)
 
 datas = []
-for i in range(1, 26):
+for i in range(1, 251):
     response = requests.get(url+f'{i}').json().get("results")
     for res in response:
         del res["original_language"]

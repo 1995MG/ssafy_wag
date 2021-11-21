@@ -33,10 +33,10 @@ export default {
   name: 'Home',
   data: function () {
     return {
-      orderIdx: 0,
+      originalMovies: null,
+      moviesOrder: null,
       movies: null,
       page: 1,
-      orderby: null,
     }
   },
   components: {
@@ -44,50 +44,22 @@ export default {
   },
   methods: {
     orderByPop: function () {
-      if (this.orderIdx) {
-        this.page = 1
-      }
-      this.orderIdx = 0
-      axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/movies/`,
-      })
-        .then((res) => {
-          this.movies = _.orderBy(res.data, 'popularity', 'desc')
-          this.movies = _.slice(this.movies, (this.page-1)*5, this.page*5)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      this.page = 1
+      this.moviesOrder = _.orderBy(this.originalMovies, 'popularity', 'desc')
+      this.movies = _.slice(this.moviesOrder, (this.page-1)*5, this.page*5)
     },
     orderByLikes: function () {
-      if (!this.orderIdx) {
-        this.page = 1
-      }
-      this.orderIdx = 1
-      axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/movies/`,
-      })
-        .then((res) => {
-          // console.log(res.data)
-          this.movies = _.orderBy(res.data, 'vote_average', 'desc')
-          this.movies = _.slice(this.movies, (this.page-1)*5, this.page*5)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      this.page = 1
+      this.moviesOrder = _.orderBy(this.originalMovies, 'vote_average', 'desc')
+      this.movies = _.slice(this.moviesOrder, (this.page-1)*5, this.page*5)
+      console.log(this.page)
     },
     plusPage: function() {
-      if (this.page==100) {
+      if (this.page == 100) {
         this.page = 100
       } else {
         this.page += 1
-      }
-      if (this.orderIdx) {
-        this.orderByLikes()
-      } else{
-        this.orderByPop()
+        this.movies = _.slice(this.moviesOrder, (this.page-1)*5, this.page*5)
       }
     },
     minusPage: function() {
@@ -95,16 +67,24 @@ export default {
         this.page = 1
       } else {
         this.page -= 1
-      }
-      if (this.orderIdx) {
-        this.orderByLikes()
-      } else{
-        this.orderByPop()
+        this.movies = _.slice(this.moviesOrder, (this.page-1)*5, this.page*5)
       }
     },
   },
   created: function () {
-    this.orderByPop()
+    axios({
+    method: 'get',
+    url: `http://127.0.0.1:8000/movies/`,
+    })
+      .then((res) => {
+        this.originalMovies = res.data
+        this.moviesOrder = _.orderBy(res.data, 'popularity', 'desc')
+        this.movies = _.slice(this.moviesOrder, (this.page-1)*5, this.page*5)
+
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   },
 }
 </script>
