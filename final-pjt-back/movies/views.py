@@ -8,12 +8,13 @@ from rest_framework.permissions import AllowAny
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def index(request, page):
+def index(request):
     # movies = get_list_or_404(Movie.objects.order_by(''))
     # https://wayhome25.github.io/django/2017/03/01/django-99-my-first-project-5/ 참조
     movies = get_list_or_404(Movie)
     serializers = MovieListSerializers(movies, many=True)
-    return Response(serializers.data[(page-1)*5:(page)*5])
+    return Response(serializers.data)
+    # return R
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
