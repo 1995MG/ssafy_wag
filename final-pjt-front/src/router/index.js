@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/movies/Home'
+import Home from '@/views/Home'
+import Recommend from '@/views/movies/Recommend'
 import Signup from '@/views/accounts/Signup'
 import Signin from '@/views/accounts/Signin'
 import Profile from '@/views/accounts/Profile'
@@ -15,6 +16,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/movies/recommend',
+    name: 'Recommend',
+    component: Recommend
   },
   {
     path: '/accounts/signup',
