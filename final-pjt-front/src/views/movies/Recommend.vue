@@ -38,6 +38,9 @@ export default {
     }
   },
   methods: {
+    toDetail: function (movie) {   
+        this.$router.push({ name: 'MovieDetail', params: {movieId: movie.id} })   
+    },
     getRandom: function () {
       this.sample = _.sampleSize(this.movies, 5)
     }
