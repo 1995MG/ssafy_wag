@@ -14,7 +14,6 @@ def index(request):
     movies = get_list_or_404(Movie)
     serializers = MovieListSerializers(movies, many=True)
     return Response(serializers.data)
-    # return Response(serializers.data[(page-1)*5:(page)*5])
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -22,3 +21,4 @@ def movie_detail(request, movie_pk):
      movie = get_object_or_404(Movie, pk=movie_pk)
      serializer = MovieSerializers(movie)
      return Response(serializer.data)
+
