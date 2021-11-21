@@ -17,7 +17,6 @@ for i in range(1, 26):
         del res["original_title"]
         del res["adult"]
         del res["video"]
-        del res["id"]
         if not res.get("release_date"):
             print(res["title"])
             continue
@@ -30,6 +29,6 @@ for i in range(1, 26):
         datas.append(data)
 
 
-with open('datas.json', 'w') as f:
+with open('datas.json', 'w', encoding='utf8') as f:
     json.dump(datas, f, indent=2, ensure_ascii = False)
 

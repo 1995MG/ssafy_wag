@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home'
 import Recommend from '@/views/movies/Recommend'
+import MovieDetail from '@/views/movies/MovieDetail'
 import Signup from '@/views/accounts/Signup'
 import Signin from '@/views/accounts/Signin'
 import Profile from '@/views/accounts/Profile'
@@ -21,6 +22,11 @@ const routes = [
     path: '/movies/recommend',
     name: 'Recommend',
     component: Recommend
+  },
+  {
+    path: '/movies/:movieId',
+    name: 'MovieDetail',
+    component: MovieDetail
   },
   {
     path: '/accounts/signup',

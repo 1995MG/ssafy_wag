@@ -53,7 +53,8 @@ export default {
         url: `http://127.0.0.1:8000/movies/`,
       })
         .then((res) => {
-          this.movies = _.slice(res.data, (this.page-1)*5, this.page*5)
+          this.movies = _.orderBy(res.data, 'popularity', 'desc')
+          this.movies = _.slice(this.movies, (this.page-1)*5, this.page*5)
         })
         .catch((err) => {
           console.log(err)
