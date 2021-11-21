@@ -22,6 +22,20 @@ export default {
       movieId: null
     }
   },
+  methods: {
+    getYoutubeUrl: function () {
+      axios({
+        method: 'get',
+        url: `https://api.themoviedb.org/3/movie/${this.movieId}/videos?api_key=131783423dfc5d2cb752bba2d8da456e&language=ko`,
+      })
+        .then((res) => {
+          console.log(res.data.results)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  },
   created: function () {
     this.movieId = this.$route.params.movieId
     axios({
@@ -29,12 +43,12 @@ export default {
       url: `http://127.0.0.1:8000/movies/${this.movieId}/`,
     })
       .then((res) => {
-        console.log(res.data)
         this.movie = res.data
       })
       .catch((err) => {
         console.log(err)
       })
+    this.getYoutubeUrl()
   }
 }
 </script>
