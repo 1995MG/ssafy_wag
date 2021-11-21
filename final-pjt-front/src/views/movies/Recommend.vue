@@ -5,7 +5,7 @@
     <div class="my-5">
       <h3 class="fw-bold">랜덤추천</h3>
         <div class="d-flex justify-content-around">
-          <div class="card" style="width: 18%;"
+          <div @click="toDetail(movie)" class="card" style="width: 18%;"
             v-for="movie in movies" :key="movie.id"
           >
             <img :src="`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`" class="card-img-top" alt="...">
@@ -36,6 +36,9 @@ export default {
     }
   },
   methods: {
+    toDetail: function (movie) {   
+        this.$router.push({ name: 'MovieDetail', params: {movieId: movie.id} })   
+    },
     getRandom: function () {
       axios({
           method: 'get',
