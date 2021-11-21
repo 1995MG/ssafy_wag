@@ -13,7 +13,7 @@ def index(request, page):
     # https://wayhome25.github.io/django/2017/03/01/django-99-my-first-project-5/ 참조
     movies = get_list_or_404(Movie)
     serializers = MovieListSerializers(movies, many=True)
-    return Response(serializers.data[(page-1)*5:page*5])
+    return Response(serializers.data[(page-1)*5:(page)*5])
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
