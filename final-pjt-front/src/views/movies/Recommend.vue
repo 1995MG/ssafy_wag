@@ -4,9 +4,10 @@
     <!-- 랜덤영화추천 -->
     <div class="my-5">
       <h3 class="fw-bold">랜덤추천</h3>
+      <button @click="getRandom" class="btn btn-primary">돌려돌려</button>
         <div class="d-flex justify-content-around">
           <div class="card" style="width: 18%;"
-            v-for="movie in movies" :key="movie.id"
+            v-for="movie in sample" :key="movie.id"
           >
             <img :src="`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`" class="card-img-top" alt="...">
             <div class="card-body">
@@ -33,25 +34,27 @@ export default {
   data: function () {
     return {
       movies: [],
+      sample: null,
     }
   },
   methods: {
     getRandom: function () {
-      axios({
+      this.sample = _.sampleSize(this.movies, 5)
+    }
+  },
+  created: function () {
+    axios({
           method: 'get',
           url: `http://127.0.0.1:8000/movies/`,
         })
           .then((res) => {
             // console.log(res.data)
-            this.movies = _.sampleSize(res.data, 5)
+            this.movies = res.data
+            this.sample = _.sampleSize(this.movies, 5)
           })
           .catch((err) => {
             console.log(err)
           })
-    }
-  },
-  created: function () {
-    this.getRandom()
   }
 }
 </script>
