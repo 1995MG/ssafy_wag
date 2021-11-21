@@ -2,7 +2,9 @@
   <div class="card" style="width: 18%;">
     <img :src="poster" class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title fw-bold">{{ movie.title }}</h5>
+      <p class="card-title fw-bold fs-6">{{ movie.title }}</p>
+      <p>★ {{ movie.vote_average }}</p>
+      <p>{{ movie.release_date | dateParse('YYYY-MM-DD') | dateFormat('YYYY') }}</p>
     </div>
   </div>
 </template>
