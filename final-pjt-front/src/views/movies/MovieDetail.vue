@@ -7,8 +7,14 @@
         <div class="video-container">
           <iframe class="video-iframe" width="100%" height="300" :src="`https://www.youtube-nocookie.com/embed/${this.youtubeurl}`" frameborder="0" allowfullscreen></iframe>
         </div>
-        <h1 class="fw-bold">{{ movie.title }}</h1>
-        <h5 class="">{{ movie.overview }}</h5>
+        <div class="my-3">
+          <h1 class="fw-bold">{{ movie.title }}</h1>
+          <h5 class="">{{ movie.overview }}</h5>
+          <hr>
+        </div>
+        <div>
+          <rank-list :movieId="movieId"></rank-list>
+        </div>
       </div>
     </div>
   </div>
@@ -16,8 +22,13 @@
 
 <script>
 import axios from 'axios'
+import RankList from '@/components/RankList.vue'
+
 export default {
   name: 'MovieDetail',
+  components: {
+    RankList
+  },
   data: function () {
     return {
       movie: '',
