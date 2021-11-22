@@ -72,7 +72,6 @@ export default {
         // headers: this.getToken()
       })
         .then((res) => {
-          console.log(res.data)
           this.writings = res.data
           this.writings.reverse()
           this.avg = _.meanBy(this.writings, 'score')
@@ -89,7 +88,6 @@ export default {
         // headers: this.getToken()
       })
         .then((res) => {
-          console.log(res.data)
           this.writings = res.data
           this.writings.reverse()
         })
@@ -105,7 +103,6 @@ export default {
         // headers: this.getToken()
       })
         .then((res) => {
-          console.log(res.data)
           this.writings = res.data
           this.writings.reverse()
         })
