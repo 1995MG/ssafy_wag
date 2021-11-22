@@ -1,7 +1,7 @@
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from rest_framework.response import Response
-from .models import Movie, Rank
-from .serializers import MovieListSerializers, MovieSerializers, RankListSerializers, RankSerializers
+from .models import Genre, Movie, Rank
+from .serializers import GenreSerializers, MovieListSerializers, MovieSerializers, RankListSerializers, RankSerializers
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework import status
@@ -75,3 +75,41 @@ def rank_likes(request, movie_pk, rank_pk):
             'count': rank.like_users.count()
         }
         return Response(context)
+
+@api_view(['GET', 'POST'])
+@permission_classes([AllowAny])
+def recommended(request, movie_pk, genre_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    movies = get_list_or_404(Movie)
+    genre = get_object_or_404(Genre, pk=genre_pk)
+    serializers_genre = GenreSerializers(genre)
+    serializers_movies = MovieListSerializers(movies, many=True)
+    serializers_movie = MovieSerializers(movie)
+
+    actor_movie_list = []
+    Director_movie_list = []
+
+    if serializers_movie.data.get("actors")[0].get("filmography")[0]:
+        actor_movie_list.append(serializers_movie.data.get("actors")[0].get("filmography")[0])
+
+    if serializers_movie.data.get("Director"):
+        if serializers_movie.data.get("Director").get("filmography"):
+            Director_movie_list.append(serializers_movie.data.get("Director").get("filmography")[0])
+    # print(serializers_movies)
+    movie_list = []
+
+    for serializers_movie in serializers_movies.data:
+        for serializers_genre_movie in serializers_genre.data.get("movie_set"):
+            if serializers_movie.get("id") == serializers_genre_movie:
+                movie_list.append(serializers_movie)
+    
+    movie_list_ordered = sorted(movie_list, key=(lambda x: x['popularity']))
+
+    context = {
+        "genreMovie": movie_list_ordered[:5],
+        "actorMovie": actor_movie_list,
+        "DirectorMovie": Director_movie_list
+
+    }
+    
+    return Response(context)
