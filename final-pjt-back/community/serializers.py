@@ -8,19 +8,19 @@ class ArticleSerializer(serializers.ModelSerializer):
         fields = ('user', 'title', 'content', 'username', 'created_at')
 
 class ArticleListSerializer(serializers.ModelSerializer):
-
+    created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M", read_only=True)
     class Meta:
         model = Article
         fields = '__all__'
 
 class CommentSerializer(serializers.ModelSerializer):
-
+    created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M", read_only=True)
     class Meta:
         model = Comment
         fields = ('content', 'user', 'article', 'username', 'id')
 
 class CommentListSerializer(serializers.ModelSerializer):
-
+    created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M", read_only=True)
     class Meta:
         model = Comment
         fields = '__all__'
