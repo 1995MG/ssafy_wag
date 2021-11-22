@@ -4,7 +4,7 @@
     <div class="card-body">
       <p class="card-title fw-bold fs-6">{{ movie.title }}</p>
       <p>★ {{ movie.vote_average }}</p>
-      <p>{{ movie.release_date | dateParse('YYYY-MM-DD') | dateFormat('YYYY') }}</p>
+      <p>{{ movie.release_date | dateParse('YYYY-MM-DD') | dateFormat('YY.MM.DD') }}</p>
     </div>
   </div>
 </template>
