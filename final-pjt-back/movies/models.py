@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.conf import settings
 # Create your models here.
 
 class Genre(models.Model):
@@ -15,3 +15,12 @@ class Movie(models.Model):
     vote_average = models.FloatField()
     vote_count = models.IntegerField()
     # id = models.IntegerField(primary_key=True)
+
+class Rank(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    username = models.CharField(max_length=50)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    score = models.IntegerField()
+    content = models.CharField(max_length=50)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_ranks')
+    created_at = models.DateTimeField(auto_now_add=True)
