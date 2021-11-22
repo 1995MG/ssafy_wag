@@ -78,13 +78,14 @@ def rank_likes(request, movie_pk, rank_pk):
 
 @api_view(['GET', 'POST'])
 @permission_classes([AllowAny])
-def recommended(request, movie_pk, genre_pk):
+def recommended(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
+    serializers_movie = MovieSerializers(movie)
+    genre_pk = serializers_movie.data.get("genre_ids")[0]
     movies = get_list_or_404(Movie)
     genre = get_object_or_404(Genre, pk=genre_pk)
     serializers_genre = GenreSerializers(genre)
     serializers_movies = MovieListSerializers(movies, many=True)
-    serializers_movie = MovieSerializers(movie)
 
     actor_movie_list = []
     Director_movie_list = []
