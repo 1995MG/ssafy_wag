@@ -5,7 +5,6 @@ from pprint import pprint
 from requests import api
 
 url = 'https://api.themoviedb.org/3/movie/popular?api_key=131783423dfc5d2cb752bba2d8da456e&language=ko-KR&page='
-
 url2 = 'https://api.themoviedb.org/3/movie/'
 url3 = 'https://api.themoviedb.org/3/person/'
 api_key = '?api_key=131783423dfc5d2cb752bba2d8da456e&language=ko-KR'
@@ -82,16 +81,16 @@ for i in range(1, 51):
                 # print(i.get("job"))
                 if i.get("job") == "Director":
                     # pprint(i.get("name"))
-                    res["Director"] = {
+                    res["director"] = {
                         "id": i.get("id"),
                         "name": i.get("name")
                     }
-            if res.get("Director"):
-                response_film = requests.get(url3+f'{res.get("Director").get("id")}/'+'movie_credits'+api_key).json().get("cast")
+            if res.get("director"):
+                response_film = requests.get(url3+f'{res.get("director").get("id")}/'+'movie_credits'+api_key).json().get("cast")
                 if response_film:
                         rr = sorted(response_film, key=(lambda x: x['vote_average']))
                         if len(rr) > 1:
-                            res.get("Director")["filmography"] = [{
+                            res.get("director")["filmography"] = [{
                                                                     "id": rr[-1].get("id"),
                                                                     "title": rr[-1].get("title"),
                                                                     "vote_average": rr[-1].get("vote_average"),

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 # from rest_framework.exceptions import MethodNotAllowed
-from .models import Movie, Rank
+from .models import Genre, Movie, Rank
 
 class MovieListSerializers(serializers.ModelSerializer):
     class Meta:
@@ -22,3 +22,8 @@ class RankSerializers(serializers.ModelSerializer):
     class Meta:
         model = Rank
         fields = ('score', 'content', 'user', 'movie', 'username', 'id')
+
+class GenreSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = ('movie_set',)
