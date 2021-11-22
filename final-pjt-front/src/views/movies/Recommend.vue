@@ -6,7 +6,7 @@
       <h3 class="fw-bold">랜덤추천</h3>
       <button @click="getRandom" class="btn btn-primary">돌려돌려</button>
         <div class="d-flex justify-content-around">
-          <div class="card" style="width: 18%;"
+          <div @click="toDetail(movie)" class="card" style="width: 18%;"
             v-for="movie in sample" :key="movie.id"
           >
             <img :src="`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`" class="card-img-top" alt="...">
