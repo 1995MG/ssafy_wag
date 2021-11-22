@@ -10,7 +10,7 @@
           <h1 class="fw-bold">{{ this.username }}</h1>
         </div>
         <div class="fw-bold d-flex align-items-center">
-          <h1 class="fw-bold">평점 평균 : {{ this.avg }}</h1>
+          <h1 class="fw-bold">평점 평균 : {{ this.avg.toFixed(2) }}</h1>
         </div>
       </div>
     </div>
