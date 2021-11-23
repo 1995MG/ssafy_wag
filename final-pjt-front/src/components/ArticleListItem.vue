@@ -1,7 +1,7 @@
 <template>
   <tr @click="toDetail(article)" class="align-middle">
     <td class="text-center">{{ article.id }}</td>
-    <td class="px-5">{{ article.title }}</td>
+    <td class="px-5">{{ article.title }}()</td>
     <td>{{ article.username }}</td>
     <td class="text-center">{{ articleCreatedAt }}</td>
     <td class="text-center">{{ likeCount }}</td>

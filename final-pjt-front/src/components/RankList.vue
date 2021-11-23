@@ -40,6 +40,12 @@
         </div>
       </div>
     </div>
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+      <input @click="orderedByDate" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+      <label class="btn btn-outline-success" for="btnradio1">최신순</label>
+      <input @click="orderedByLike" type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+      <label class="btn btn-outline-success" for="btnradio2">좋아요순</label>
+    </div>
     <rank-list-item class="container"
       v-for="rank in ranks"
       :key="rank.id"
@@ -82,6 +88,12 @@ export default {
         Authorization: `JWT ${token}`
       }
       return config
+    },
+    orderedByDate: function () {
+      this.ranks = _.orderBy(this.ranks, 'id', 'desc')
+    },
+    orderedByLike: function () {
+      this.ranks = _.orderBy(this.ranks, function(_) { return _.like_users.length; }, 'desc')
     },
     createRank: function () {
       const rankItem = {
