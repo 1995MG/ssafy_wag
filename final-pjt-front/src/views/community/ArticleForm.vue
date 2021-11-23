@@ -2,7 +2,7 @@
   <div class="articleform container">
     <div class="my-5 input-group-lg">
       <div class="d-flex justify-content-between">
-        <h1 class="fw-bold">커뮤니티 글쓰기</h1>
+        <h1 class="fw-bold text-white">커뮤니티 글쓰기</h1>
         <button @click="createArticle" class="btn btn-success btn-lg">등록</button>
       </div>
       <hr>

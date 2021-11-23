@@ -1,6 +1,6 @@
 <template>
   <div class="container my-5">
-    <h1 class="fw-bold">현재상영작</h1>
+    <h1 class="fw-bold text-white">현재상영작</h1>
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <movie-list :movies="nows"></movie-list>
@@ -15,7 +15,7 @@
       </button>
     </div>
     <hr>
-    <h1 class="fw-bold">영화 리스트</h1>
+    <h1 class="fw-bold text-white">영화 리스트</h1>
     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
       <input @click="orderedByPop" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
       <label class="btn btn-outline-success" for="btnradio1">인기순</label>

@@ -1,8 +1,8 @@
 <template>
-  <div class="container my-5" v-if="article">
+  <div class="container my-5 text-white" v-if="article">
     <!-- 게시글 정보 -->
     <div class="d-flex justify-content-between">
-      <div>
+      <div class="text-white">
         <h3 class="fw-bold">{{ article.title}}</h3>
         <p>{{ article.username }}  |  {{ article.created_at }}</p>
       </div>
@@ -15,7 +15,7 @@
           <i @click="like" class="fas fa-heart fa-2x" style="color: red"></i>
         </span>
         <span v-else>
-          <i @click="like" class="far fa-heart fa-2x" ></i>
+          <i @click="like" class="far fa-heart fa-2x" style="color: white"></i>
         </span>
       </div>
     </div>

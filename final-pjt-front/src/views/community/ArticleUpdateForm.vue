@@ -2,7 +2,7 @@
   <div class="container">
     <div class="my-5 input-group-lg">
       <div class="d-flex justify-content-between">
-        <h1 class="fw-bold">커뮤니티 글 수정</h1>
+        <h1 class="fw-bold text-white">커뮤니티 글 수정</h1>
         <button @click="updateArticle" class="btn btn-success btn-lg">수정</button>
       </div>
       <hr>

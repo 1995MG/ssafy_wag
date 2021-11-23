@@ -1,5 +1,5 @@
 <template>
-  <div class="signup container">
+  <div class="signup container text-white">
     <h1 class="fw-bold">회원가입</h1>
     <div class="my-3 input-group-lg">
       <label class="fw-bold mb-1" for="username">아이디</label>
