@@ -11,6 +11,7 @@
       <br>
       <input @keyup.enter="signin" v-model="credentials.password" class="form-control" type="password" id="password">
     </div>
+    <p v-if="err"> * 아이디나 비밀번호를 확인해주세요.</p>
     <button @click="signin" class="btn btn-success btn-lg my-3">로그인</button>
   </div>
 </template>
@@ -23,10 +24,14 @@ export default {
   data: function () {
     return {
       credentials: {
-      }
+      },
+      err: false
     }
   },
   methods: {
+    signinErr: function () {
+      this.err = true
+    },
     signin: function () {
       axios({
         method: 'post',
@@ -41,6 +46,7 @@ export default {
         })
         .catch((err) => {
           console.log(err)
+          this.signinErr()
         })
     },
   },

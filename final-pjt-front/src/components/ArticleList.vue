@@ -27,13 +27,17 @@ import ArticleListItem from '@/components/ArticleListItem.vue'
 
 export default {
   name: 'ArticleList',
+  data: function () {
+    return {
+      articleList: null
+    }
+  },
   components: {
     ArticleListItem,
   },
   props: {
     articles: Array
-  }
-
+  },
 }
 </script>
 

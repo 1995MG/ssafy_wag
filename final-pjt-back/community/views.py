@@ -127,3 +127,10 @@ def comment_likes(request, article_pk, comment_pk):
             'count': comment.like_users.count()
         }
         return Response(context)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def search(request, keyword):
+    articles = Article.objects.filter(title__contains=keyword)
+    serializers = ArticleListSerializer(articles, many=True)
+    return Response(serializers.data)
