@@ -117,3 +117,10 @@ def recommended(request, movie_pk):
     }
     
     return Response(context)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def search(request, keyword):
+    movie = Movie.objects.filter(title__contains=keyword)
+    serializers = MovieListSerializers(movie, many=True)
+    return Response(serializers.data)

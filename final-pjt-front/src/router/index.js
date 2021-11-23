@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home'
 import Recommend from '@/views/movies/Recommend'
+import Search from '@/views/movies/Search'
 import MovieDetail from '@/views/movies/MovieDetail'
 import Signup from '@/views/accounts/Signup'
 import Signin from '@/views/accounts/Signin'
@@ -27,6 +28,11 @@ const routes = [
     path: '/movies/:movieId',
     name: 'MovieDetail',
     component: MovieDetail
+  },
+  {
+    path: '/movies/search',
+    name: 'Search',
+    component: Search
   },
   {
     path: '/accounts/signup',
