@@ -1,22 +1,22 @@
 <template>
-  <div class="profile container">
+  <div class="profile container text-white">
     <!-- 프로필 정보 -->
-    <div class="row my-5">
-      <div class="col-3 d-flex justify-content-center">
-        <img src="@/assets/logo.png" alt="">
+    <div class="row mt-5 mb-3 px-5">
+      <div class="col-3 d-flex justify-content-center align-items-center">
+        <img src="@/assets/babygroot.png" height="80%" alt="">
       </div>
       <div class="col-9 row">
-        <div class="d-flex align-items-center">
-          <h1 class="fw-bold">{{ this.username }}</h1>
+        <div class="d-flex align-items-center pt-5">
+          <h1 class="fw-bold pt-5">{{ this.username }}</h1>
         </div>
-        <div class="fw-bold d-flex align-items-center">
-          <h1 class="fw-bold">평점 평균 : {{ this.avg }}</h1>
+        <div class="fw-bold d-flex align-items-center pb-5">
+          <h1 class="fw-bold pb-5">평점 평균 : {{ this.avg.toFixed(2) }}</h1>
         </div>
       </div>
     </div>
     <hr>
     <!-- 활동 목록 -->
-    <div class="btn-group my-3" role="group" aria-label="Basic radio toggle button group">
+    <div class="btn-group mt-1 mb-4" role="group" aria-label="Basic radio toggle button group" style="background-color: rgba(33, 37, 41, 0.8)">
       <input @click="getRank" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
       <label class="btn btn-lg btn-outline-success" for="btnradio1">평점</label>
       <input @click="getArticle" type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">

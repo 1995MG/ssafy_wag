@@ -17,7 +17,7 @@
       </button>
     </div>
     <hr>
-    <h1 class="fw-bold">영화 리스트</h1>
+    <h1 class="fw-bold text-white">영화 리스트</h1>
     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
       <input @click="orderedByPop" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
       <label class="btn btn-outline-success" for="btnradio1">인기순</label>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container my-5 border">
+  <div class="container my-5 border text-white">
     <div class="row">
       <img class=col-7 :src="`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`" alt="..." style="">
       <!-- 영화정보 -->
