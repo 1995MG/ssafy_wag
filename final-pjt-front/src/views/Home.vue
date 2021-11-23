@@ -1,44 +1,55 @@
 <template>
   <div class="container my-5">
-    <input v-model="keyword" type="text" @keyup.enter="toSearch(keyword)">
-    <button @click="toSearch(keyword)">search</button>
-    <h1 class="fw-bold">현재상영작</h1>
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <movie-list :movies="nows"></movie-list>
-      </div>
-      <button @click="minusPageNows" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-      <button @click="plusPageNows" class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+    <div class="d-flex mb-5">
+      <input class="form-control" v-model="keyword" type="text" @keyup.enter="toSearch(keyword)">
+      <button class="btn btn-success mx-3" @click="toSearch(keyword)">search</button>
     </div>
-    <hr>
-    <h1 class="fw-bold text-white">영화 리스트</h1>
-    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-      <input @click="orderedByPop" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-      <label class="btn btn-outline-success" for="btnradio1">인기순</label>
-      <input @click="orderedByLikes" type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-      <label class="btn btn-outline-success" for="btnradio2">평점순</label>
-    </div>
-    <div class="my-5">
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <hr class="text-white">
+    <!-- 현재상영작 -->
+    <div class="my-4">
+      <h1 class="fw-bold text-white">현재상영작</h1>
+      <div id="carouselExampleControls" class="my-3 carousel slide d-flex align-items-center" data-bs-ride="carousel">
+        <button @click="minusPageNows" class="btn btn-outline-light" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span aria-hidden="true"></span>
+          <span>≪</span>
+        </button>
         <div class="carousel-inner">
-          <movie-list :movies="movies"></movie-list>
+          <movie-list :movies="nows"></movie-list>
         </div>
-        <button @click="minusPageMovies" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-        <button @click="plusPageMovies" class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
+        <button @click="plusPageNows" class="btn btn-outline-light" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span aria-hidden="true"></span>
+          <span>≫</span>
         </button>
       </div>
-      <div class="my-5">
+    </div>
+    <hr class="text-white">
+    <!-- 영화리스트 -->
+    <div class="my-4">
+      <div class="d-flex align-items-center">
+        <h1 class="fw-bold text-white align-middle mb-0">영화리스트</h1>
+        <div class="btn-group mx-3" role="group" aria-label="Basic radio toggle button group">
+          <input @click="orderedByPop" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+          <label class="btn btn-outline-success" for="btnradio1">인기순</label>
+          <input @click="orderedByLikes" type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+          <label class="btn btn-outline-success" for="btnradio2">평점순</label>
+        </div>
+      </div>
+      <div class="my-3">
+        <div id="carouselExampleControls" class="my-3 carousel slide d-flex align-items-center" data-bs-ride="carousel">
+          <button @click="minusPageMovies" class="btn btn-outline-light" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span aria-hidden="true"></span>
+            <span>≪</span>
+          </button>
+          <div class="carousel-inner">
+            <movie-list :movies="movies"></movie-list>
+          </div>
+          <button @click="plusPageMovies" class="btn btn-outline-light" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span aria-hidden="true"></span>
+            <span>≫</span>
+          </button>
+        </div>
+        <div class="my-5">
+      </div>
     </div>
   </div>
   </div>
@@ -111,7 +122,9 @@ export default {
       }
     },
     toSearch: function (keyword) {
-      this.$router.push({ name: 'Search', params: {keyword: keyword} })  
+      if (keyword != null) {
+        this.$router.push({ name: 'Search', params: {keyword: keyword} })  
+      }
     }
   },
   created: function () {
