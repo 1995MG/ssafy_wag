@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="d-flex justify-content-between">
-      <h5 class="fw-bold">평점</h5>
+      <div class="d-flex">
+        <h5 class="fw-bold">평점</h5>
+        <p class="mx-3">TMDB평점 : {{ this.tmdbAvg }}  | 그루트평점 : {{ this.grootAvg.toFixed(1) }}</p>
+      </div>
       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal">평점등록</button>
       <!-- 평점등록모달 -->
       <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -49,7 +52,7 @@
 
 <script>
 import axios from 'axios'
-// import _ from 'lodash'
+import _ from 'lodash'
 import jwt_decode from 'jwt-decode'
 import RankListItem from '@/components/RankListItem.vue'
 export default {
@@ -62,6 +65,8 @@ export default {
       content: null,
       user: null,
       username: null,
+      grootAvg: 0,
+      tmdbAvg : 0,
     }
   },
   props: {
@@ -130,7 +135,20 @@ export default {
         })
           .then((res) => {
             this.ranks = res.data
+            this.grootAvg = _.meanBy(this.ranks, 'score')
             // this.ranks = _.orderBy(res.data, 'likes_users', 'desc')
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+
+    axios({
+          method: 'get',
+          url: `http://127.0.0.1:8000/movies/${this.movieId}/`,
+          headers: this.getToken()
+        })
+          .then((res) => {
+            this.tmdbAvg = res.data.vote_average
           })
           .catch((err) => {
             console.log(err)

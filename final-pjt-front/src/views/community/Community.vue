@@ -1,7 +1,7 @@
 <template>
   <div class="community container my-5">
     <div class="d-flex justify-content-between">
-      <h1 class="fw-bold">커뮤니티</h1>
+      <h1 class="fw-bold text-white">커뮤니티</h1>
       <router-link :to="{ name: 'ArticleForm' }">
         <button class="btn btn-success btn-lg">글쓰기</button>
       </router-link>
