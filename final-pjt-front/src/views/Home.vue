@@ -1,6 +1,8 @@
 <template>
   <div class="container my-5">
-    <h1 class="fw-bold text-white">현재상영작</h1>
+    <input v-model="keyword" type="text" @keyup.enter="toSearch(keyword)">
+    <button @click="toSearch(keyword)">search</button>
+    <h1 class="fw-bold">현재상영작</h1>
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <movie-list :movies="nows"></movie-list>
@@ -57,7 +59,8 @@ export default {
       movies: null,
       nows: null,
       pageMovies: 1,
-      pageNows: 1
+      pageNows: 1,
+      keyword: null,
     }
   },
   components: {
@@ -107,6 +110,9 @@ export default {
         this.nows = _.slice(this.nowsOrdered, (this.pageNows-1)*5, this.pageNows*5)
       }
     },
+    toSearch: function (keyword) {
+      this.$router.push({ name: 'Search', params: {keyword: keyword} })  
+    }
   },
   created: function () {
     axios({

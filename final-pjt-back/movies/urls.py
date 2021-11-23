@@ -10,5 +10,6 @@ urlpatterns = [
     path('<int:movie_pk>/rank/', views.rank_list_create),
     path('<int:movie_pk>/rank/<int:rank_pk>/', views.rank_delete),
     path('<int:movie_pk>/rank/<int:rank_pk>/likes/', views.rank_likes),
-    path('recommended/<int:movie_pk>/', views.recommended, name='recommended'),
+    path('recommended/<int:movie_pk>/', views.recommended),
+    path('search/<keyword>/', views.search)
 ]
