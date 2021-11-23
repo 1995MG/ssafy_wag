@@ -41,18 +41,20 @@
       </div>
     </div>
     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-      <input @click="orderedByDate" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-      <label class="btn btn-outline-success" for="btnradio1">최신순</label>
-      <input @click="orderedByLike" type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-      <label class="btn btn-outline-success" for="btnradio2">좋아요순</label>
+      <input @click="orderedByLike" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+      <label class="btn btn-outline-success" for="btnradio1">좋아요순</label>
+      <input @click="orderedByDate" type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+      <label class="btn btn-outline-success" for="btnradio2">최신순</label>
     </div>
-    <rank-list-item class="container"
-      v-for="rank in ranks"
-      :key="rank.id"
-      :ranks="ranks"
-      :rank="rank"
-    >
-    </rank-list-item>
+    <div class="scroll" style="height:340px;">
+      <rank-list-item class="container"
+        v-for="rank in ranks"
+        :key="rank.id"
+        :ranks="ranks"
+        :rank="rank"
+      >
+      </rank-list-item>
+    </div>
   </div>
 </template>
 
@@ -148,6 +150,7 @@ export default {
           .then((res) => {
             this.ranks = res.data
             this.grootAvg = _.meanBy(this.ranks, 'score')
+            this.ranks = _.orderBy(this.ranks, function(_) { return _.like_users.length; }, 'desc')
             // this.ranks = _.orderBy(res.data, 'likes_users', 'desc')
           })
           .catch((err) => {

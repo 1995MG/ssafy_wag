@@ -1,11 +1,10 @@
 <template>
   <div class="container my-5">
-    <h1 class="fw-bold text-white">영화추천</h1>
     <!-- 랜덤영화추천 -->
-    <div v-if="sample" class="my-5">
+    <div v-if="sample" class="my-3">
       <div class="d-flex">
-        <h3 class="fw-bold text-white">랜덤추천</h3>
-        <button @click="getRandom" class="btn btn-success mx-3">돌려돌려</button>
+        <h1 class="fw-bold text-white mb-0">랜덤추천</h1>
+        <button @click="getRandom" class="btn btn-sm btn-success my-2 mx-3">돌려돌려</button>
       </div>
         <div class="d-flex justify-content-around mt-3">
           <div @click="toDetail(movie)" class="card" style="width: 18%;"
@@ -22,7 +21,7 @@
     </div>
     <!-- 알고리즘기반영화추천 -->
     <div v-if="rcmdMovies" class="my-5">
-      <h3 class="fw-bold text-white">그루트추천<b-button size="sm" class="mx-3" v-b-popover.hover.right="'가장 최근 작성한 리뷰의 주연, 감독, 장르를 기반으로 영화를 추천합니다.'">?</b-button></h3>
+      <h1 class="fw-bold text-white">그루트추천<b-button class="mx-3 mb-2" v-b-popover.hover.right="'가장 최근 작성한 리뷰의 주연, 감독, 장르를 기반으로 영화를 추천합니다.'">?</b-button></h1>
       
       <div class="d-flex justify-content-around mt-3">
           <div @click="toDetail(movie)" class="card" style="width: 18%;"
