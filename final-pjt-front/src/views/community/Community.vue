@@ -1,26 +1,30 @@
 <template>
   <div class="community container my-5">
     <div class="d-flex justify-content-between">
-      <h1 class="fw-bold text-white">커뮤니티</h1>
-      <div>
-        <input v-model="keyword" type="text" @keyup.enter="toSearch(keyword)">
-        <button @click="toSearch(keyword)">search</button>
+      <div class="d-flex">
+        <div class="btn-group mx-3" role="group" aria-label="Basic radio toggle button group">
+          <input @click="orderByDate" type="radio" class="btn-check d-flex" name="btnradio" id="btnradio1" autocomplete="off" checked>
+          <label class="btn btn-outline-success" style="padding-top: 0.6rem" for="btnradio1">최신순</label>
+          <input @click="orderByLike" type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+          <label class="btn btn-outline-success" style="padding-top: 0.6rem" for="btnradio2">좋아요순</label>
+        </div>
       </div>
-      <router-link :to="{ name: 'ArticleForm' }">
-        <button class="btn btn-success btn-lg">글쓰기</button>
-      </router-link>
+      <div class="d-flex">
+        <div class="d-flex">
+          <input class="form-control me-1" style="width: 80%" v-model="keyword" type="text" @keyup.enter="toSearch(keyword)">
+          <button class="btn btn-success me-3" @click="toSearch(keyword)">search</button>
+        </div>
+        <router-link :to="{ name: 'ArticleForm' }">
+          <button class="btn btn-success btn-lg">글쓰기</button>
+        </router-link>
+      </div>
     </div>
     <hr>
     <!-- 커뮤니티 페이지 -->
     <div>
-      <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <input @click="orderByDate" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-        <label class="btn btn-outline-success" for="btnradio1">최신순</label>
-        <input @click="orderByLike" type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-        <label class="btn btn-outline-success" for="btnradio2">좋아요순</label>
-      </div>
       <article-list :articles="articles"></article-list>
     </div>
+    <!-- 페이지네이션 -->
   </div>
 </template>
 
@@ -34,6 +38,7 @@ export default {
   data: function () {
     return {
       articles: null,
+      chunkArticle: null,
       keyword: null,
     }
   },

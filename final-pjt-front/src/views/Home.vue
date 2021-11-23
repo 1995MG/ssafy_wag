@@ -1,6 +1,6 @@
 <template>
   <div class="container my-5">
-    <div class="d-flex mb-5">
+    <div class="d-flex mb-3">
       <input class="form-control" v-model="keyword" type="text" @keyup.enter="toSearch(keyword)">
       <button class="btn btn-success mx-3" @click="toSearch(keyword)">search</button>
     </div>

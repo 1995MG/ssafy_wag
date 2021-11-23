@@ -1,8 +1,8 @@
 <template>
   <div class="profile container text-white">
     <!-- 프로필 정보 -->
-    <div class="row mt-5 mb-3 px-5">
-      <div class="col-3 d-flex justify-content-center align-items-center">
+    <div class="row px-5" style="height: 300px">
+      <div class="col-3 d-flex justify-content-center align-items-center" style="height: 300px">
         <img src="@/assets/babygroot.png" height="80%" alt="">
       </div>
       <div class="col-9 row">
@@ -24,17 +24,19 @@
       <input @click="getComment" type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
       <label class="btn btn-lg btn-outline-success" for="btnradio3">댓글</label>
     </div>
-    <!-- 활동 내역 -->
-    <div @click="toDetail(writing)" v-for="writing in writings" :key="writing.id">
-      <div v-if="btn==1">
-        <h3>{{ writing.title }}</h3>
-        <p>{{ writing.created_at}}</p>
+      <!-- 활동 내역 -->
+    <div class="scroll" style="height:385px;">
+      <div @click="toDetail(writing)" v-for="writing in writings" :key="writing.id">
+        <div v-if="btn==1">
+          <h3>{{ writing.title }}</h3>
+          <p>{{ writing.created_at}}</p>
+        </div>
+        <div v-else>
+          <h3>{{ writing.content }}</h3>
+          <p>{{ writing.created_at }}</p>
+        </div>
+        <hr>
       </div>
-      <div v-else>
-        <h3>{{ writing.content }}</h3>
-        <p>{{ writing.created_at }}</p>
-      </div>
-      <hr>
     </div>
   </div>
 </template>
@@ -77,6 +79,7 @@ export default {
           this.avg = _.meanBy(this.writings, 'score')
         })
         .catch((err) => {
+          this.writings = []
           console.log(err)
         })
     },
@@ -92,6 +95,7 @@ export default {
           this.writings.reverse()
         })
         .catch((err) => {
+          this.writings = []
           console.log(err)
         })
     },
@@ -107,6 +111,7 @@ export default {
           this.writings.reverse()
         })
         .catch((err) => {
+          this.writings = []
           console.log(err)
         })
     },

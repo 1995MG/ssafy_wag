@@ -1,9 +1,9 @@
 <template>
   <div class="container my-5 border text-white">
     <div class="row">
-      <img class=col-7 :src="`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`" alt="..." style="">
+      <img class="col-2" :src="`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`" alt="..." style="width: 50%; height: 50%;">
       <!-- 영화정보 -->
-      <div class="col-5">
+      <div class="col-6">
         <div class="video-container">
           <iframe class="video-iframe" width="100%" height="300" :src="`https://www.youtube-nocookie.com/embed/${this.youtubeurl}`" frameborder="0" allowfullscreen></iframe>
         </div>
