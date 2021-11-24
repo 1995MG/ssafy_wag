@@ -35,7 +35,7 @@ export default {
       axios({
         method: 'get',
         url: `http://127.0.0.1:8000/community/${this.article.id}/likes/`,
-        headers: this.setToken()
+        // headers: this.setToken()
       })
         .then((res) => {
           this.likeCount = res.data.count
@@ -48,7 +48,7 @@ export default {
       axios({
         method: 'get',
         url: `http://127.0.0.1:8000/community/${this.article.id}/comment/`,
-        headers: this.setToken()
+        // headers: this.setToken()
       })
         .then((res) => {
           this.commentCount = res.data.length
