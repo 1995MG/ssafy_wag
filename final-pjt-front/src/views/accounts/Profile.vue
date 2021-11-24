@@ -25,7 +25,7 @@
       <label class="btn btn-lg btn-outline-success" for="btnradio3">댓글</label>
     </div>
       <!-- 활동 내역 -->
-    <div class="scroll" style="height:385px;">
+    <div v-if="writings.length" class="scroll" style="height:385px;">
       <div @click="toDetail(writing)" v-for="writing in writings" :key="writing.id">
         <div v-if="btn==1">
           <h3>{{ writing.title }}</h3>
@@ -37,6 +37,9 @@
         </div>
         <hr>
       </div>
+    </div>
+    <div v-else class="scroll d-flex justify-content-center my-5" style="height:385px;">
+      <h3 class="fw-bold text-white">작성 내역이 없습니다.</h3>
     </div>
   </div>
 </template>
@@ -54,7 +57,7 @@ export default {
       userId: null,
       username: null,
       writings: [],
-      avg: null,
+      avg: 0,
       // writing: null,
     }
   },

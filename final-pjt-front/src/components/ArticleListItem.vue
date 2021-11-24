@@ -1,11 +1,11 @@
 <template>
-  <tr @click="toDetail(article)" class="align-middle">
-    <td class="text-center">{{ article.id }}</td>
-    <td class="px-5">{{ article.title }} [{{this.commentCount}}]</td>
-    <td>{{ article.username }}</td>
-    <td class="text-center">{{ articleCreatedAt }}</td>
-    <td class="text-center">{{ likeCount }}</td>
-  </tr>
+  <b-tr @click="toDetail(article)" class="align-middle">
+    <b-td class="text-center">{{ article.id }}</b-td>
+    <b-td class="px-5">{{ article.title }} [{{this.commentCount}}]</b-td>
+    <b-td>{{ article.username }}</b-td>
+    <b-td class="text-center">{{ articleCreatedAt }}</b-td>
+    <b-td class="text-center">{{ likeCount }}</b-td>
+  </b-tr>
 </template>
 
 <script>

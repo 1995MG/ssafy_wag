@@ -24,7 +24,6 @@
     <div>
       <article-list :articles="articles"></article-list>
     </div>
-    <!-- 페이지네이션 -->
   </div>
 </template>
 

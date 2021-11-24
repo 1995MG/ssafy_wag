@@ -1,7 +1,8 @@
 <template>
   <div class="container my-5 border text-white">
     <div class="row">
-      <img class="col-2" :src="`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`" alt="..." style="width: 50%; height: 50%;">
+      <img v-if="movie.poster_path" class="col-2" :src="`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`" alt="..." style="width: 50%; height: 50%;">
+      <img v-else class="col-2" src="@/assets/sadgroot.jpg" alt="" style="width: 50%; height: 50%;">
       <!-- 영화정보 -->
       <div class="col-6">
         <div class="video-container">

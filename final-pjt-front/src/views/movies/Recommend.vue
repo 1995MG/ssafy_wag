@@ -10,7 +10,8 @@
           <div @click="toDetail(movie)" class="card" style="width: 18%;"
             v-for="movie in sample" :key="movie.id"
           >
-            <img :src="`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`" class="card-img-top" alt="...">
+            <img v-if="movie.poster_path" :src="`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`" class="card-img-top" alt="...">
+            <img v-else src="@/assets/sadgroot.jpg" height="67%" alt="">
             <div class="card-body">
               <p class="card-title fw-bold fs-6">{{ movie.title }}</p>
               <p>★ {{ movie.vote_average }}</p>
@@ -20,9 +21,8 @@
         </div>
     </div>
     <!-- 알고리즘기반영화추천 -->
-    <div v-if="rcmdMovies" class="my-5">
-      <h1 class="fw-bold text-white">그루트추천<b-button class="mx-3 mb-2" v-b-popover.hover.right="'가장 최근 작성한 리뷰의 주연, 감독, 장르를 기반으로 영화를 추천합니다.'">?</b-button></h1>
-      
+    <h1 class="fw-bold text-white my-5">그루트추천<b-button class="mx-3 mb-2" v-b-popover.hover.right="'가장 최근 작성한 리뷰의 주연, 감독, 장르를 기반으로 영화를 추천합니다.'">?</b-button></h1>
+    <div v-if="rcmdMovies.length" class="">
       <div class="d-flex justify-content-around mt-3">
           <div @click="toDetail(movie)" class="card" style="width: 18%;"
             v-for="movie in rcmdMovies" :key="movie.id"
@@ -36,6 +36,9 @@
             </div>
           </div>
         </div>
+    </div>
+    <div v-else class="d-flex justify-content-center">
+      <h3 class="fw-bold text-white">리뷰를 작성해주세요.</h3>
     </div>
   </div>
 </template>
