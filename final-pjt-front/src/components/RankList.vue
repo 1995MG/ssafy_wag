@@ -11,7 +11,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title fw-bold" id="ModalLabel">평점등록</h5>
+              <h5  class="modal-title fw-bold" id="ModalLabel">평점등록</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -88,10 +88,12 @@ export default {
     getToken: function () {
       const token = localStorage.getItem('jwt')
       this.validtoken = token
-      const config = {
-        Authorization: `JWT ${token}`
+      if (token) {
+        const config = {
+          Authorization: `JWT ${token}`
+        }
+        return config
       }
-      return config
     },
     orderedByDate: function () {
       this.ranks = _.orderBy(this.ranks, 'id', 'desc')
@@ -123,6 +125,7 @@ export default {
           })
           .catch((err) => {
             console.log(err)
+            this.$router.push({ name: 'Signin' })
           })
       }
     },
@@ -130,11 +133,13 @@ export default {
   created: function(){
     const token = localStorage.getItem('jwt')
     // console.log(jwt_decode(token))
-    this.user = jwt_decode(token).user_id
+    if (token) {
+      this.user = jwt_decode(token).user_id
+    }
     axios({
       method: 'get',
         url: `http://127.0.0.1:8000/accounts/${this.user}/`,
-        headers: this.getToken()
+        // headers: this.getToken()
       })
         .then((res) => {
           // console.log(res)
@@ -147,7 +152,7 @@ export default {
     axios({
           method: 'get',
           url: `http://127.0.0.1:8000/movies/${this.movieId}/rank/`,
-          headers: this.getToken()
+          // headers: this.getToken()
         })
           .then((res) => {
             this.ranks = res.data
@@ -162,7 +167,7 @@ export default {
     axios({
           method: 'get',
           url: `http://127.0.0.1:8000/movies/${this.movieId}/`,
-          headers: this.getToken()
+          // headers: this.getToken()
         })
           .then((res) => {
             this.tmdbAvg = res.data.vote_average

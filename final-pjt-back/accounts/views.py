@@ -29,6 +29,7 @@ def signup(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_username(request, user_pk):
     user = get_object_or_404(User, pk=user_pk)
     serializer = UserSerializer(user)

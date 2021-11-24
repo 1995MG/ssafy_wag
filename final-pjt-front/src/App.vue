@@ -64,8 +64,10 @@ export default{
   },
   created: function () {
     const token = localStorage.getItem('jwt')
-    const decodedToken = jwt_decode(token)
-    this.username = decodedToken.username
+    if (token) {
+      const decodedToken = jwt_decode(token)
+      this.username = decodedToken.username
+    }
 
     if (token) {
       this.isSignin = true
@@ -73,10 +75,9 @@ export default{
   },
   updated: function () {
     const token = localStorage.getItem('jwt')
-    const decodedToken = jwt_decode(token)
-    this.username = decodedToken.username
-
     if (token) {
+      const decodedToken = jwt_decode(token)
+      this.username = decodedToken.username
       this.isSignin = true
     }
   },
