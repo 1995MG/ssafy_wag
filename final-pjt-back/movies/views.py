@@ -88,17 +88,17 @@ def recommended(request, movie_pk):
     serializers_movies = MovieListSerializers(movies, many=True)
 
     actor_movie_list = []
-    Director_movie_list = []
+    director_movie_list = []
 
     if serializers_movie.data.get("actors")[0].get("filmography")[0]:
         for i in serializers_movie.data.get("actors"):
             for j in i.get("filmography"):
                 actor_movie_list.append(j)
 
-    if serializers_movie.data.get("Director"):
-        if serializers_movie.data.get("Director").get("filmography"):
-            for i in serializers_movie.data.get("Director").get("filmography"):
-                Director_movie_list.append(i)
+    if serializers_movie.data.get("director"):
+        if serializers_movie.data.get("director").get("filmography"):
+            for i in serializers_movie.data.get("director").get("filmography"):
+                director_movie_list.append(i)
     # print(serializers_movies)
     movie_list = []
 
@@ -112,7 +112,7 @@ def recommended(request, movie_pk):
     context = {
         "genreMovie": movie_list_ordered[:5],
         "actorMovie": actor_movie_list,
-        "DirectorMovie": Director_movie_list
+        "directorMovie": director_movie_list
 
     }
     

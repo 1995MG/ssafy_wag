@@ -76,11 +76,11 @@ export default {
         })
           .then((res) => {
             console.log(res.data)
-            this.rcmdMovies.push(_.flattenDeep(res.data.DirectorMovie))
+            this.rcmdMovies.push(_.flattenDeep(res.data.directorMovie))
             this.rcmdMovies.push(_.flattenDeep(res.data.actorMovie))
             this.rcmdMovies.push(_.flattenDeep(res.data.genreMovie))
             console.log(this.rcmdMovies)
-            this.rcmdMovies = _.sampleSize(_.flattenDeep(this.rcmdMovies), 5)
+            this.rcmdMovies = _.sampleSize(_.uniq(_.flattenDeep(this.rcmdMovies)), 5)
           })
           .catch((err) => {
             console.log(err)

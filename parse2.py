@@ -43,39 +43,72 @@ for i in range(1, 51):
                 response_film2 = requests.get(url3+f'{response_credit[1].get("id")}/'+'movie_credits'+api_key).json().get("cast")
 
                 if response_film1:
-                    rr1 = sorted(response_film1, key=(lambda x: x['vote_average']))
-                    if len(rr1) > 1:
-                        res.get("actors")[0]["filmography"] = [{
-                                                                "id": rr1[-1].get("id"),
-                                                                "title": rr1[-1].get("title"),
-                                                                "vote_average": rr1[-1].get("vote_average"),
-                                                                "release_date": rr1[-1].get("release_date"),
-                                                                "poster_path": rr1[-1].get("poster_path")
-                                                                },
-                                                                {
-                                                                "id": rr1[-2].get("id"),
-                                                                "title": rr1[-2].get("title"),
-                                                                "vote_average": rr1[-2].get("vote_average"),
-                                                                "release_date": rr1[-2].get("release_date"),
-                                                                "poster_path": rr1[-2].get("poster_path")
-                                                                }]
+                    check = True
+                    for a in response_film1:
+                        if not a.get("popularity"):
+                            check = False
+                            break
+                    if check:
+                        rr1 = sorted(response_film1, key=(lambda x: x['popularity']))
+                        if rr1[-1].get("id") == res.get("id"):
+                            rr1.pop()
+                        if len(rr1) > 1:
+                            res.get("actors")[0]["filmography"] = [{
+                                                                    "id": rr1[-1].get("id"),
+                                                                    "title": rr1[-1].get("title"),
+                                                                    "vote_average": rr1[-1].get("vote_average"),
+                                                                    "release_date": rr1[-1].get("release_date"),
+                                                                    "poster_path": rr1[-1].get("poster_path")
+                                                                    },
+                                                                    {
+                                                                    "id": rr1[-2].get("id"),
+                                                                    "title": rr1[-2].get("title"),
+                                                                    "vote_average": rr1[-2].get("vote_average"),
+                                                                    "release_date": rr1[-2].get("release_date"),
+                                                                    "poster_path": rr1[-2].get("poster_path")
+                                                                    }]
+                        elif len(rr1) == 1:
+                            res.get("actors")[0]["filmography"] = [{
+                                                                    "id": rr1[-1].get("id"),
+                                                                    "title": rr1[-1].get("title"),
+                                                                    "vote_average": rr1[-1].get("vote_average"),
+                                                                    "release_date": rr1[-1].get("release_date"),
+                                                                    "poster_path": rr1[-1].get("poster_path")
+                                                                    }]
                 if response_film2:
-                    rr2 = sorted(response_film2, key=(lambda x: x['vote_average']))
-                    if len(rr2) > 1:
-                        res.get("actors")[1]["filmography"] = [{
-                                                                "id": rr2[-1].get("id"),
-                                                                "title": rr2[-1].get("title"),
-                                                                "vote_average": rr2[-1].get("vote_average"),
-                                                                "release_date": rr2[-1].get("release_date"),
-                                                                "poster_path": rr2[-1].get("poster_path")
-                                                                },
-                                                                {
-                                                                "id": rr2[-2].get("id"),
-                                                                "title": rr2[-2].get("title"),
-                                                                "vote_average": rr2[-2].get("vote_average"),
-                                                                "release_date": rr2[-2].get("release_date"),
-                                                                "poster_path": rr2[-2].get("poster_path")
-                                                                }]
+                    check2 = True
+                    for b in response_film2:
+                        if not b.get("popularity"):
+                            check2 = False
+                            break
+                    if check2:
+                        rr2 = sorted(response_film2, key=(lambda x: x['popularity']))
+                        if rr2[-1].get("id") == res.get("id"):
+                            rr2.pop()
+                        if len(rr2) > 1:
+                            res.get("actors")[1]["filmography"] = [{
+                                                                    "id": rr2[-1].get("id"),
+                                                                    "title": rr2[-1].get("title"),
+                                                                    "vote_average": rr2[-1].get("vote_average"),
+                                                                    "release_date": rr2[-1].get("release_date"),
+                                                                    "poster_path": rr2[-1].get("poster_path")
+                                                                    },
+                                                                    {
+                                                                    "id": rr2[-2].get("id"),
+                                                                    "title": rr2[-2].get("title"),
+                                                                    "vote_average": rr2[-2].get("vote_average"),
+                                                                    "release_date": rr2[-2].get("release_date"),
+                                                                    "poster_path": rr2[-2].get("poster_path")
+                                                                    }]
+                        elif len(rr2) == 1:
+                            res.get("actors")[1]["filmography"] = [{
+                                                                    "id": rr2[-1].get("id"),
+                                                                    "title": rr2[-1].get("title"),
+                                                                    "vote_average": rr2[-1].get("vote_average"),
+                                                                    "release_date": rr2[-1].get("release_date"),
+                                                                    "poster_path": rr2[-1].get("poster_path")
+                                                                    }]
+
         if response_credit1:
             for i in response_credit1:
                 # print(i.get("job"))
@@ -88,7 +121,9 @@ for i in range(1, 51):
             if res.get("director"):
                 response_film = requests.get(url3+f'{res.get("director").get("id")}/'+'movie_credits'+api_key).json().get("cast")
                 if response_film:
-                        rr = sorted(response_film, key=(lambda x: x['vote_average']))
+                        rr = sorted(response_film, key=(lambda x: x['popularity']))
+                        if rr[-1].get("id") == res.get("id"):
+                            rr.pop()
                         if len(rr) > 1:
                             res.get("director")["filmography"] = [{
                                                                     "id": rr[-1].get("id"),
@@ -103,6 +138,14 @@ for i in range(1, 51):
                                                                     "vote_average": rr[-2].get("vote_average"),
                                                                     "release_date": rr[-2].get("release_date"),
                                                                     "poster_path": rr[-2].get("poster_path")
+                                                                    }]
+                        elif len(rr) == 1:
+                            res.get("director")["filmography"] = [{
+                                                                    "id": rr[-1].get("id"),
+                                                                    "title": rr[-1].get("title"),
+                                                                    "vote_average": rr[-1].get("vote_average"),
+                                                                    "release_date": rr[-1].get("release_date"),
+                                                                    "poster_path": rr[-1].get("poster_path")
                                                                     }]
 
 
