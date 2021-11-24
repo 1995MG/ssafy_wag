@@ -26,8 +26,8 @@
     <div class="container">
       <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 mt-4 mb-0 border-top">
         <div class="col-md-4 d-flex align-items-center">
-          <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-            <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+          <a href="https://i.giphy.com/media/R97jJCEGEmh0I/giphy.webp" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+            <img src="./assets/logo.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
           </a>
           <span class="text-muted">© 2021 Team Wag, All Rights Reserved.</span>
         </div>
@@ -36,7 +36,7 @@
           <li class="nav-item"><a href="/movies/recommend" class="nav-link px-2 text-muted">Recommend</a></li>
           <li class="nav-item"><a href="/community" class="nav-link px-2 text-muted">Community</a></li>
           <li class="nav-item"><a href="/accounts/profile" class="nav-link px-2 text-muted">Profile</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+          <li class="nav-item"><a href="https://github.com/sangjinCHOI/ssafy_wag" class="nav-link px-2 text-muted">About</a></li>
         </ul>
       </footer>
     </div>
