@@ -51,8 +51,8 @@ export default {
       this.err = true
     },
     signup: function () {
-      // console.log(this.credentials)
-      if (this.credentials.username.length > 3 & this.credentials.password.lenth > 8) {
+      if (this.credentials.username.length >= 3 & this.credentials.password.length >= 8) {
+        console.log('여긴가')
         axios({
           method: 'post',
           url: 'http://127.0.0.1:8000/accounts/signup/',
