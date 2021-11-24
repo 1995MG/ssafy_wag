@@ -15,7 +15,7 @@
           <button class="btn btn-success me-3" @click="toSearch(keyword)">search</button>
         </div>
         <router-link :to="{ name: 'ArticleForm' }">
-          <button class="btn btn-success btn-lg">글쓰기</button>
+          <button v-if="validtoken" class="btn btn-success btn-lg">글쓰기</button>
         </router-link>
       </div>
     </div>
@@ -36,6 +36,7 @@ export default {
   name: 'Community',
   data: function () {
     return {
+      validtoken: null,
       articles: null,
       chunkArticle: null,
       keyword: null,
@@ -47,6 +48,7 @@ export default {
   methods: {
     setToken: function () {
       const token = localStorage.getItem('jwt')
+      this.validtoken = token
       const config = {
         Authorization: `JWT ${token}`
       }

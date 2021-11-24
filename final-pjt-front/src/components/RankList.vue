@@ -5,7 +5,7 @@
         <h5 class="fw-bold">평점</h5>
         <p class="mx-3">TMDB평점 : {{ this.tmdbAvg }}  | 그루트평점 : {{ this.grootAvg.toFixed(1) }}</p>
       </div>
-      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal">평점등록</button>
+      <button v-if="validtoken" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal">평점등록</button>
       <!-- 평점등록모달 -->
       <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -67,6 +67,7 @@ export default {
   name: 'RankList',
   data: function ()   {
     return {
+      validtoken: null,
       ranks: [],
       rank: null,
       score: null,
@@ -86,6 +87,7 @@ export default {
   methods: {
     getToken: function () {
       const token = localStorage.getItem('jwt')
+      this.validtoken = token
       const config = {
         Authorization: `JWT ${token}`
       }

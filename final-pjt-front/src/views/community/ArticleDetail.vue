@@ -1,7 +1,7 @@
 <template>
   <div class="container my-5 text-white" v-if="article">
     <!-- 게시글 정보 -->
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between my-5">
       <div class="text-white">
         <h3 class="fw-bold">{{ article.title}}</h3>
         <p>{{ article.username }}  |  {{ article.created_at }}</p>
