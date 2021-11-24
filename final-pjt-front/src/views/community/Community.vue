@@ -48,7 +48,6 @@ export default {
   methods: {
     setToken: function () {
       const token = localStorage.getItem('jwt')
-      this.validtoken = token
       const config = {
         Authorization: `JWT ${token}`
       }
@@ -102,6 +101,8 @@ export default {
     },
   },
   created: function () {
+    const token = localStorage.getItem('jwt')
+    this.validtoken = token
     this.getArticles()
   },
 }

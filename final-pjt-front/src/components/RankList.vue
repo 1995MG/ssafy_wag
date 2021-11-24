@@ -87,7 +87,6 @@ export default {
   methods: {
     getToken: function () {
       const token = localStorage.getItem('jwt')
-      this.validtoken = token
       if (token) {
         const config = {
           Authorization: `JWT ${token}`
@@ -132,6 +131,7 @@ export default {
   },
   created: function(){
     const token = localStorage.getItem('jwt')
+    this.validtoken = token
     // console.log(jwt_decode(token))
     if (token) {
       this.user = jwt_decode(token).user_id
