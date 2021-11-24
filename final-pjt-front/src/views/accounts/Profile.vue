@@ -25,7 +25,7 @@
       <label class="btn btn-lg btn-outline-success" for="btnradio3">댓글</label>
     </div>
       <!-- 활동 내역 -->
-    <div v-if="writings.length" class="scroll" style="height:385px;">
+    <div v-if="writings.length" class="scroll" style="height:385px; background-color: rgba(33, 37, 41, 0.8)" >
       <div @click="toDetail(writing)" v-for="writing in writings" :key="writing.id">
         <div v-if="btn==1">
           <h3>{{ writing.title }}</h3>
