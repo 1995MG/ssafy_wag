@@ -15,7 +15,7 @@ class Movie(models.Model):
     vote_average = models.FloatField()
     vote_count = models.IntegerField()
     actors = models.JSONField(null=True)
-    Director = models.JSONField(null=True)
+    director = models.JSONField(null=True)
     # id = models.IntegerField(primary_key=True)
 
 class Rank(models.Model):
