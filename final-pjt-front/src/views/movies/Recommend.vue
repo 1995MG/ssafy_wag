@@ -7,15 +7,15 @@
         <button @click="getRandom" class="btn btn-sm btn-success my-2 mx-3">돌려돌려</button>
       </div>
         <div class="d-flex justify-content-around mt-3">
-          <div @click="toDetail(movie)" class="card" style="width: 18%;"
+          <div @click="toDetail(movie)" class="card text-white" style="width: 18%; height: 485px; background-color: rgba(50, 60, 65, 0.9)"
             v-for="movie in sample" :key="movie.id"
           >
             <img v-if="movie.poster_path" :src="`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`" class="card-img-top" alt="...">
             <img v-else src="@/assets/sadgroot.jpg" height="67%" alt="">
-            <div class="card-body">
-              <p class="card-title fw-bold fs-6">{{ movie.title }}</p>
-              <p>★ {{ movie.vote_average }}</p>
-              <p>{{ movie.release_date | dateParse('YYYY-MM-DD') | dateFormat('YYYY') }}</p>
+            <div class="card-body d-flex align-items-start flex-column">
+              <p class="card-title fw-bold fs-6 mb-auto">{{ movie.title }}</p>
+              <p class="my-0 align-text-bottom">{{ movie.release_date | dateParse('YYYY-MM-DD') | dateFormat('YYYY') }}</p>
+              <p class="my-0 align-text-bottom">★ {{ movie.vote_average }}</p>
             </div>
           </div>
         </div>
@@ -24,15 +24,15 @@
     <h1 class="fw-bold text-white my-5">그루트추천<b-button class="mx-3 mb-2" v-b-popover.hover.right="'가장 최근 작성한 리뷰의 주연, 감독, 장르를 기반으로 영화를 추천합니다.'">?</b-button></h1>
     <div v-if="rcmdMovies.length" class="">
       <div class="d-flex justify-content-around mt-3">
-          <div @click="toDetail(movie)" class="card" style="width: 18%;"
+          <div @click="toDetail(movie)" class="card text-white" style="width: 18%; height: 485px; background-color: rgba(50, 60, 65, 0.9)"
             v-for="movie in rcmdMovies" :key="movie.id"
           >
             <img v-if="movie.poster_path" :src="`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`" class="card-img-top" alt="Not Found" onerror="this.src='#';" >
-            <img v-else src="@/assets/sadgroot.jpg" height="67%" alt="">
-            <div class="card-body">
-              <p class="card-title fw-bold fs-6">{{ movie.title }}</p>
-              <p>★ {{ movie.vote_average }}</p>
-              <p v-if="movie.release_date">{{ movie.release_date | dateParse('YYYY-MM-DD') | dateFormat('YYYY') }}</p>
+            <img v-else src="@/assets/sadgroot.jpg" height="72%" alt="">
+            <div class="card-body d-flex align-items-start flex-column">
+              <p class="card-title fw-bold fs-6 mb-auto">{{ movie.title }}</p>
+              <p class="my-0 align-text-bottom" v-if="movie.release_date">{{ movie.release_date | dateParse('YYYY-MM-DD') | dateFormat('YYYY') }}</p>
+              <p class="my-0 align-text-bottom">★ {{ movie.vote_average }}</p>
             </div>
           </div>
         </div>

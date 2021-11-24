@@ -50,11 +50,14 @@ export default {
   methods: {
     getToken: function () {
       const token = localStorage.getItem('jwt')
-      this.login_user = jwt_decode(token).user_id
-      const config = {
-        Authorization: `JWT ${token}`
+      if (token) {
+
+        this.login_user = jwt_decode(token).user_id
+        const config = {
+          Authorization: `JWT ${token}`
+        }
+        return config
       }
-      return config
     },
     like: function () {
       axios({
@@ -97,7 +100,7 @@ export default {
     axios({
       method: 'get',
       url: `http://127.0.0.1:8000/movies/${this.movieId}/rank/${this.rank.id}/likes/`,
-      headers: this.getToken()
+      // headers: this.getToken()
     })
       .then((res) => {
         this.liked = res.data.liked
@@ -112,7 +115,7 @@ export default {
     axios({
       method: 'get',
       url: `http://127.0.0.1:8000/movies/${this.movieId}/rank/${this.rank.id}/likes/`,
-      headers: this.getToken()
+      // headers: this.getToken()
     })
       .then((res) => {
         this.liked = res.data.liked

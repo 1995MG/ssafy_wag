@@ -51,6 +51,7 @@ export default {
       this.err = true
     },
     signup: function () {
+      // console.log(this.credentials)
       if (this.credentials.username.length >= 3 & this.credentials.password.length >= 8) {
         axios({
           method: 'post',
