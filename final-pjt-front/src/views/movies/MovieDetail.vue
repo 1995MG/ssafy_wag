@@ -1,6 +1,6 @@
 <template>
-  <div class="container my-5 border text-white">
-    <div class="row">
+  <div class="container my-5 border text-white" >
+    <div class="row" style="background-color: rgba(33, 37, 41, 0.8)">
       <img v-if="movie.poster_path" class="col-2" :src="`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`" alt="..." style="width: 50%; height: 50%;">
       <img v-else class="col-2" src="@/assets/sadgroot.jpg" alt="" style="width: 50%; height: 50%;">
       <!-- 영화정보 -->
