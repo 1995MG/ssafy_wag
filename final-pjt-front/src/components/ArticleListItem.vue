@@ -48,6 +48,7 @@ export default {
     article: Object
   },
   created: function () {
+    console.log(this.article)
     this.getLikes()
     this.articleCreatedAt = this.article.created_at.substring(0, 10) + ' ' + this.article.created_at.substring(11, 16)
   }
