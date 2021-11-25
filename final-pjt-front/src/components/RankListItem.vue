@@ -100,7 +100,7 @@ export default {
     axios({
       method: 'get',
       url: `http://127.0.0.1:8000/movies/${this.movieId}/rank/${this.rank.id}/likes/`,
-      // headers: this.getToken()
+      headers: this.getToken()
     })
       .then((res) => {
         this.liked = res.data.liked
@@ -115,7 +115,7 @@ export default {
     axios({
       method: 'get',
       url: `http://127.0.0.1:8000/movies/${this.movieId}/rank/${this.rank.id}/likes/`,
-      // headers: this.getToken()
+      headers: this.getToken()
     })
       .then((res) => {
         this.liked = res.data.liked

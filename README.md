@@ -13,17 +13,20 @@
 - front
 
   - ```bash
-    npm install
+    npm install i
+    npm run serve
     ```
 
 - back
 
   - ```bash
+    pip install -r requirements.txt
     python manage.py makemigrations
     python manage.py migrate
     python manage.py loaddata data.json
+    python manage.py runserver
     ```
-
+    
     
 
 ### 01. 팀원 정보 및 업무 분담 내역
