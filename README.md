@@ -107,27 +107,31 @@
 
 #### Home
 
-<img src="README.assets/홈페이지.png" alt="홈페이지" style="zoom:50%;" />
+![홈페이지](README.assets/홈페이지.png)
+
+
 
 #### 영화 추천
 
-<img src="README.assets/영화추천.png" alt="영화추천" style="zoom:50%;" />
+![영화추천](README.assets/영화추천.png)
 
 
 
 #### 영화 디테일
 
-<img src="README.assets/영화디테일.png" alt="영화디테일" style="zoom:50%;" />
+![영화디테일](README.assets/영화디테일.png)
 
 
 
 #### 커뮤니티
 
-#### <img src="README.assets/커뮤니티.png" alt="커뮤니티" style="zoom:50%;" />
+![커뮤니티](README.assets/커뮤니티.png)
+
+
 
 #### 프로필
 
-<img src="README.assets/프로필.png" alt="프로필" style="zoom:50%;" />
+![프로필](README.assets/프로필.png)
 
 
 
