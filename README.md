@@ -61,7 +61,7 @@
 
 ### 03. 데이터베이스 모델링(ERD)
 
-
+![erd](README.assets/erd.jpg)
 
 ### 04. 필수 기능
 
